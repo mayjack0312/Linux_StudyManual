@@ -11,7 +11,7 @@
 - 我们知道处理器处理数据的基本单位是字。而内核把页作为内存管理的基本单位。那么，页在内存中是如何描述的？
 - 内核用struct page结构体表示系统中的每一个物理页：
 
-![img](v2-77cb4c8e04103730a7ce581f149f60df_720w.webp)
+![img](img/v2-77cb4c8e04103730a7ce581f149f60df_720w.webp)
 
 - flags存放页的状态，如该页是不是脏页。
 - _count域表示该页的使用计数，如果该页未被使用，就可以在新的分配中使用它。
@@ -26,7 +26,7 @@
 - ZONE_DMA区中的页用来进行DMA时使用。ZONE_HIGHMEM是高端内存，其中的页不能永久的映射到内核地址空间，也就是说，没有虚拟地址。剩余的内存就属于ZONE_NORMAL区。
 - 我们可以看一下描述区的结构体struct zone（在linux/mmzone.h中定义）。
 
-![img](v2-f614dbdf9b08631eabf3158ceef5ff78_720w.webp)
+![img](img/v2-f614dbdf9b08631eabf3158ceef5ff78_720w.webp)
 
 - 这个结构体比较长，我只截取了一部分出来。
 - 实际上不是所有的体系结构都定义了全部区，有些64位的体系结构，比如Intel的x86-64体系结构可以映射和处理64位的内存空间，所以其没有ZONE_HIGHMEM区。而有些体系结构中的所有地址都可用于DMA，所以这些体系结构就没有ZONE_DMA区。
@@ -40,18 +40,18 @@
 - 获得页
 - 获得页使用的接口是alloc_pages函数，我们来看下它的源码（位于linux/gfp.h中）
 
-![img](v2-0cda6b20bf52c617b2845b226c869acc_720w.webp)
+![img](img/v2-0cda6b20bf52c617b2845b226c869acc_720w.webp)
 
 - 可以看到，该函数返回值是指向page结构体的指针，参数gfp_mask是一个标志，简单来讲就是获得页所使用的行为方式。order参数规定分配多少页面，该函数分配2的order次方个连续的物理页面。返回的指针指向的是第一page页面。
 - 获得页的方式不只一种，我们还可以使用__get_free_pages函数来获得页，该函数和alloc_pages的参数一样，然而它会返回一个虚拟地址。源码如下：
 
-![img](v2-f86b5807e6672401ee1d45cebed03d7c_720w.webp)
+![img](img/v2-f86b5807e6672401ee1d45cebed03d7c_720w.webp)
 
 - 可以看到，这个函数其实也是调用了alloc_pages函数，只不过在获得了struct page结构体后使用page_address函数获得了虚拟地址。
 - 另外还有alloc_page函数与__get_free_page函数，都是获得一个页，其实就是将前面两个函数的order分别置为了0而已。这里不赘述了。
 - 我们在使用这些接口获取页的时候可能会面对一个问题，我们获得的这些页若是给用户态用，虽然这些页中的数据都是随机产生的垃圾数据，不过，虽然概率很低，但是也有可能会包含某些敏感信息。所以，更谨慎些，我们可以将获得的页都填充为0。这会用到get_zeroed_page函数。看下它的源码：
 
-![img](v2-961c9b8c5be9e8fa14bf2836864fda01_720w.webp)
+![img](img/v2-961c9b8c5be9e8fa14bf2836864fda01_720w.webp)
 
 - 这个函数也用到了__get_free_pages函数。只是加了一种叫做__GFP_ZERO的gfp_mask方式。所以，这些获得页的函数最终调用的都是alloc_pages函数。alloc_pages函数是获得页的核心函数。
 
@@ -77,7 +77,7 @@
 
 - 分配和释放数据结构是内核中的基本操作。有些多次会用到的数据结构如果频繁分配内存必然导致效率低下。slab层就是用于解决频繁分配和释放数据结构的问题。为便于理解slab层的层次结构，请看下图
 
-![img](v2-738dd737f55602e9c58986fd7d126083_720w.webp)
+![img](img/v2-738dd737f55602e9c58986fd7d126083_720w.webp)
 
 - 简单的说，物理内存中有多个高速缓存，每个高速缓存都是一个结构体类型，一个高速缓存中会有一个或多个slab，slab通常为一页，其中存放着数据结构类型的实例化对象。
 - 分配高速缓存的接口是struct kmem_cache kmem_cache_create (const char *name, size_t size, size_t align,unsigned long flags, void (*ctor)(void ))。
@@ -87,15 +87,15 @@
 - 参数是kmem_cache结构体，也就是分配好的高速缓存，flags是标志位。
 - 抽象的介绍看着不直观， 我们看个具体的例子。之前我写过一个关于jbd2日志系统的博客，介绍过jbd2的模块初始化过程。其中就提到过jbd2在进行模块初始化的时候是会创建几个高速缓冲区的。如下：
 
-![img](v2-a64cc625d9ff3764d6148df5eeb849eb_720w.webp)
+![img](img/v2-a64cc625d9ff3764d6148df5eeb849eb_720w.webp)
 
 我们看看第一个创建缓冲区的函数。
 
-![img](v2-8e1fda07352ff6af12cfe3cf02915a11_720w.webp)
+![img](img/v2-8e1fda07352ff6af12cfe3cf02915a11_720w.webp)
 
 - 首先是断言缓冲区一定为空的。然后用kmem_cache_create创建了两个缓冲区。两个高速缓冲区就这么创建好了。看下图
 
-![img](v2-3f6442ce0e51e1567c3bc48a15c29e58_720w.webp)
+![img](img/v2-3f6442ce0e51e1567c3bc48a15c29e58_720w.webp)
 
 - 这里用kmem_cache结构体，也就是jbd2_revoke_record_cache高速缓存实例化了一个对象。
 
