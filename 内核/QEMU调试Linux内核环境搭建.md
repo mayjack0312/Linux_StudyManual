@@ -75,7 +75,7 @@ linux-4.14.191/arch/x86_64/boot/bzImage文件。
 
 配置如下图所示。
 
-![img](v2-e0d428c6416d550ea8a9a63f312829f2_720w.webp)
+![img](img/v2-e0d428c6416d550ea8a9a63f312829f2_720w.webp)
 
 ## 3、制作rootfs
 
@@ -112,7 +112,7 @@ linux-4.14.191/arch/x86_64/boot/bzImage文件。
 
 制作完成的rootfs目录如下：
 
-![img](v2-1ba6139f5be23b5ff1fa7dff3127a1b4_720w.png)
+![img](img/v2-1ba6139f5be23b5ff1fa7dff3127a1b4_720w.png)
 
 最后，卸载rootfs.img
 
@@ -138,7 +138,7 @@ linux-4.14.191/arch/x86_64/boot/bzImage文件。
 
 启动后如下图：
 
-![img](v2-a1ac8883734a813038ac49d0d63df87c_720w.webp)
+![img](img/v2-a1ac8883734a813038ac49d0d63df87c_720w.webp)
 
 Ctrl+A 松开后按C退出qemu。
 
@@ -160,13 +160,13 @@ Ctrl+A 松开后按C退出qemu。
 
 在new_sync_read函数添加断点，continue。
 
-![img](v2-9f2418155c69bb0e89d153dbbef6b182_720w.png)
+![img](img/v2-9f2418155c69bb0e89d153dbbef6b182_720w.png)
 
 在系统中执行ls命令，触发new_sync_read函数，
 
-![img](v2-36b0951bcc8ec68e8177fddc2e5e9637_720w.webp)
+![img](img/v2-36b0951bcc8ec68e8177fddc2e5e9637_720w.webp)
 
-![img](v2-dd247f3ca0bfb7363441dec1457aa9ae_720w.webp)
+![img](img/v2-dd247f3ca0bfb7363441dec1457aa9ae_720w.webp)
 
 至此，完成了qemu环境下使用gdb进行内核函数的调试。
 
@@ -190,7 +190,7 @@ Ctrl+A 松开后按C退出qemu。
 
 进入qemu系统后使用mount命令挂载sdb到mnt目录。
 
-![img](v2-75de138afb8ed66bfae152adae30f499_720w.webp)
+![img](img/v2-75de138afb8ed66bfae152adae30f499_720w.webp)
 
 在原系统中挂载ext4.img，实现qemu与原系统的文件共享。
 
@@ -198,6 +198,6 @@ Ctrl+A 松开后按C退出qemu。
 1szp@r420-PowerEdge-R420:~/shadisk$ sudo mount -t ext4 -o loop ext4.img ./share
 ```
 
-![img](v2-6f41a473063998d324e96b784c3dec98_720w.png)
+![img](img/v2-6f41a473063998d324e96b784c3dec98_720w.png)
 
 至此，可以在宿主机器share目录下，与qemu中的虚拟机器进行文件共享。
