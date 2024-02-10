@@ -57,7 +57,7 @@ sudo gedit /etc/hosts
 
 访问[该网站](https://github.com.ipaddress.com/)获得一个访问Github最快的IP地址，在浏览器直接输入该IP地址访问。
 
-![](1.png)
+![](img/1.png)
 
 将该IP地址写入hosts文件中，然后在cmd下运行命令 `ipconfig /flushdns`刷新DNS缓存。
 
@@ -93,9 +93,9 @@ cat id_rsa.pub
 # Ggithub 添加 ssh key
 ```
 
-![](2.png)
+![](img/2.png)
 
-![](3.png)
+![](img/3.png)
 
 最后测试是否成功配置 ssh key
 
