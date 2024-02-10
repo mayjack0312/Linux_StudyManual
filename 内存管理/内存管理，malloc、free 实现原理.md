@@ -19,7 +19,7 @@ free(ptr);
 
 动态分配的内存都在堆中，堆从低地址向高地址增长：
 
-![image](https://user-images.githubusercontent.com/87457873/127428499-f85498fd-aa16-4e44-a419-89d1b852978b.png)
+![image](img/127428499-f85498fd-aa16-4e44-a419-89d1b852978b.png)
 
 Linux 提供了两个系统调用 `brk` 和 `sbrk`：
 
@@ -38,7 +38,7 @@ void *sbrk(intptr_t increment);
 
 `malloc` 分配时会搜索空闲链表，根据匹配原则，找到一个大于等于所需空间的空闲区块，然后将其分配出去，返回这部分空间的指针。如果没有这样的内存块，则向操作系统申请扩展堆内存。注意，返回的指针是从可用空间开始的，而不是从首部开始的：
 
-![image](https://user-images.githubusercontent.com/87457873/127428664-699d5245-d62f-4c8d-b336-21e60107729f.png)
+![image](img/127428664-699d5245-d62f-4c8d-b336-21e60107729f.png)
 
 malloc 所实际使用的内存匹配算法有很多，执行时间和内存消耗各有不同。到底使用哪个匹配算法，取决于实现。常见的内存匹配算法有：
 
@@ -151,11 +151,11 @@ void free(void *ptr) {  // ptr 是要回收的空间
 这种实现方式维护一个空闲块链表，只包含未分配的内存块。malloc 分配时会搜索空闲链表，找到第一个大于等于所需空间的空闲区块，然后从该区块的尾部取出所需要的空间，剩余空间还是存在空闲链表中；如果该区块的剩余部分不足以放下首部信息，则直接将其从空闲链表摘除。最后返回这部分空间的指针。
 下面是这种实现方式的几个示例： 
 
-![image](https://user-images.githubusercontent.com/87457873/127428872-9e4ff1c0-97d4-4e0c-898d-4d157749855f.png)
+![image](img/127428872-9e4ff1c0-97d4-4e0c-898d-4d157749855f.png)
 
-![image](https://user-images.githubusercontent.com/87457873/127428877-6f7f9133-c6f6-4ec1-81ae-4bfea33e0a00.png)
+![image](img/127428877-6f7f9133-c6f6-4ec1-81ae-4bfea33e0a00.png)
 
-![image](https://user-images.githubusercontent.com/87457873/127428882-5847bc86-1e21-42c4-b6c2-28ed9d111345.png)
+![image](img/127428882-5847bc86-1e21-42c4-b6c2-28ed9d111345.png)
 
 通过 free 释放内存时，会将内存块加入到空闲链表中，并将前后相邻的空闲内存合并，这时使用双向链表管理空闲链表就很有用了。
 
@@ -219,10 +219,3 @@ malloc 分配的函数应该是字对齐的。在 32 位模式中，malloc 返�
 malloc 只分配几种固定大小的内存块，可以减少外部碎片，简化对齐实现，降低管理成本。
 
 free 只需要传递一个指针就可以释放内存，空间大小可以从首部读取。
-
-
-
-
-
-
-
