@@ -2,7 +2,7 @@
 
 下载linux源文件：https://www.kernel.org/ ，我下载的是`linux-3.7.4`版本，解压到`/usr/src/kernels`目录中，然后进入`/usr/src/kernels/linux-3.7.4`中，用`make menuconfig`命令来选择要编译的模块，但使用`make menuconfig`（重新编译内核常用的命令，还可以用其他的）报下面的错误：
 
-![img](v2-99c76217f4575d98a9001a4fd8c1681d_720w.webp)
+![img](img/v2-99c76217f4575d98a9001a4fd8c1681d_720w.webp)
 
 说缺少ncurses库，然后安装ncurses开发库就可以了，ubuntu下貌似是libncurses-dev包
 
@@ -10,7 +10,7 @@
 
 再次使用make menuconfig，出现下面的界面：
 
-![img](v2-9749efd129f16d1a3c6f980cf3d5c7a3_720w.webp)
+![img](img/v2-9749efd129f16d1a3c6f980cf3d5c7a3_720w.webp)
 
 然后我直接保存了，都用的默认的选项。
 
@@ -38,7 +38,7 @@
 
 initrd 文件，他的目的在于提供启动过程中所需要的最重要的核心模块，以让系统启动过程可以顺利完成。 会需要 initrd 的原因，是因为核心模块放至于/lib/modules/$(uname -r)/kernel/ 当中， 这些模块必须要根目录 (/) 被挂载时才能够被读取。但是如果核心本身不具备磁盘的驱动程序时， 当然无法挂载根目录，也就没有办法取得驱动程序，因此造成两难的地步，如果没有initrd文件，启动系统时会报下面的错误。
 
-![img](v2-a9dc897ce503c0295a1e3f10a734bf44_720w.webp)
+![img](img/v2-a9dc897ce503c0295a1e3f10a734bf44_720w.webp)
 
 mkinitrd可以将 /lib/modules/.... 内的模块（启动过程当中一定需要的模块）包成一个文件 (就是initrd文件)， 然后在启动时透过主机的 INT 13 硬件功能将该文件读出来解压缩，并且 initrd 在内存内会模拟成为根目录， 由于此虚拟文件系统 (Initial RAM Disk) 主要包含磁盘与文件系统的模块，因此我们的核心最后就能够认识实际的磁盘， 那就能够进行实际根目录的挂载！所以说：initrd 内所包含的模块大多是与启动过程有关，而主要以文件系统及硬盘模块 (如 usb, SCSI 等) 为主！（参考鸟哥的书）
 
@@ -54,6 +54,6 @@ mkinitrd可以将 /lib/modules/.... 内的模块（启动过程当中一定需�
 
 最后就是重新启动系统，选择刚编译的内核那项启动，不过我的系统总是报下面的错误
 
-![img](v2-f74eb8dd5e44dea0806e1aa7bd52e452_720w.webp)
+![img](img/v2-f74eb8dd5e44dea0806e1aa7bd52e452_720w.webp)
 
 在网上找了半天，很多都是按我上面写的编译内核的，也没出现这个问题，不知道是不是因为我是在vmware下编译内核的原因。汗，按提示是没有找到根设备，但如果我用原本的内核启动，却不会出错，原来的内核启动也是通过uuid来找根设备的。
