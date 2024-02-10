@@ -15,7 +15,7 @@ catagories:
 
 # 1. 示意图
 
-![这里写图片描述](git-arch.png)
+![](img/git-arch.png)
 
 - Workspace：工作区
 - Index / Stage：暂存区
