@@ -249,15 +249,15 @@ index a801aea..84692d5 100644
 
 `git log --stat -n`：有的时候只想查看每一次commit到底有多少改动量，而不想知道具体的改动是什么，可以使用`--stat`参数。如果只想查看最近几次的commit的改动量，只需要再加 `-n`。如果想把改动的内容显示处理，可以加 `-p`。
 
-![](2022-03-07-10-05-33.png)
+![](img/2022-03-07-10-05-33.png)
 
 `git log --graph`：可以展示提交的一个树形分支结构
 
-![](2022-03-07-10-07-42.png)
+![](img/2022-03-07-10-07-42.png)
 
 `git log --pretty`：支持DIY自己想要的log展示，比如常用的是`git log --pretty=oneline`，这里的`oneline`是一种格式，表示单行展示，也就是会把commit展示的信息压缩成一行。关于`--pretty`更多用法有需求的时候再查，这里不再记录了。
 
-![](2022-03-07-10-10-38.png)
+![](img/2022-03-07-10-10-38.png)
 
 参考[学会这三个命令，你就不再是git只会用三板斧的菜鸟了](https://www.cnblogs.com/techflow/p/13856483.html)
 
@@ -276,7 +276,7 @@ e88bf8637ca31fd95a36a47d20837bb3d3b650c3 a.txt c2
 
 希望合并最近的两次提交，使用命令`git rebase -i HEAD~2`，将除了第一个`pick`外的其它`pick`改为`s`，即`squash`。之后保存退出。
 
-![](2022-03-07-11-09-41.png)
+![](img/2022-03-07-11-09-41.png)
 
 再次查看commit记录，发现commit第一次记录3088bc和第二次记录 e88bf8 合并为一次提交7d988f。
 
@@ -350,13 +350,13 @@ user@jinbo:t$ git merge branch_c6_c8
 
 第三种方式也是把需要修改的记录调整为最新的提交，然后使用2的方式修改，示例如下：
 
-![](image-20230412214030136.png)
+![](img/image-20230412214030136.png)
 
 我们希望修改之前的第五个提交：`git rebase -i HEAD~5`
 
-![](image-20230412213456714.png)
+![](img/image-20230412213456714.png)
 
-![](image-20230412213419070.png)
+![](img/image-20230412213419070.png)
 
 在弹出的界面中，将第一个 pick 改成 e，wq保持退出后，终端打印
 
@@ -380,7 +380,7 @@ git commit --amend
 
 弹出如下界面，我们修改commit记录如下图所示
 
-![](image-20230412213836966.png)
+![](img/image-20230412213836966.png)
 
 再输入命令
 
@@ -391,7 +391,7 @@ Successfully rebased and updated refs/heads/master.
 
 此时 log 内容为
 
-![](image-20230412214723630.png)
+![](img/image-20230412214723630.png)
 
 ## 打 patch
 
@@ -435,7 +435,7 @@ reflog是reference log的意思，也就是引用log，记录HEAD在各个分支
 
 为什么不用git log？git log是用来记录当前分支的commit  log，分支都删除了，找不到commit log了。但可以找到目标分支最后一次的`commit id`
 
-![](image-20230412212235304.png)
+![](img/image-20230412212235304.png)
 
 比如这里，我们将远程分支`master`删除了，但是我们找到了从分支`t`切换到`master`的这个移动轨迹`0342d3f HEAD@{2023-04-04 23:19:04 +0800}: checkout: moving from t to master`，那么可以根据`0342d3f`切出分支:
 
