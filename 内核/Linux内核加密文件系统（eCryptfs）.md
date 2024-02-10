@@ -2,7 +2,7 @@ eCryptfs是在Linux内核2.6.19版本中，由IBM公司的Halcrow，Thompson等�
 
 ## **1、eCryptfs架构设计**
 
-![img](v2-f3bf234fa7baed1a177bbd457323ee97_720w.webp)
+![img](img/v2-f3bf234fa7baed1a177bbd457323ee97_720w.webp)
 
 > 图片摘自《eCryptfs: a Stacked Cryptographic Filesystem》
 
@@ -24,19 +24,19 @@ eCryptfs 使用用户提供的口令（Passphrase）、公开密钥算法（如 
 
 1.安装用户空间应用程序ecryptfs-utils
 
-![img](v2-2b3613ff7bad248f5812719f59f3a426_720w.webp)
+![img](img/v2-2b3613ff7bad248f5812719f59f3a426_720w.webp)
 
 2.发起mount指令，在ecryptfs-utils的辅助下输入用户口令，选择加密算法，完成挂载。挂载成功后，将对my_cryptfs目录下的所有文件进行加密处理。
 
-![img](v2-ca05aa2dd1c8a11ea1ca03bb598c5768_720w.webp)
+![img](img/v2-ca05aa2dd1c8a11ea1ca03bb598c5768_720w.webp)
 
 \3. 在加密目录下新增文件，当umount当前挂载目录后，再次查看该目录下文件时，可以看到文件已被加密处理过。
 
-![img](v2-15a13f9b28d9b346f1aefd28e796dd30_720w.webp)
+![img](img/v2-15a13f9b28d9b346f1aefd28e796dd30_720w.webp)
 
 ## **3、eCryptfs的加解密流程**
 
-![img](v2-7cc3242ccb60476c8525998a1e3a901d_720w.webp)
+![img](img/v2-7cc3242ccb60476c8525998a1e3a901d_720w.webp)
 
 > 图片摘自《eCryptfs: a Stacked Cryptographic Filesystem》
 
@@ -46,21 +46,21 @@ eCryptfs对数据的加解密流程如图所示，对称密钥加密算法以块
 
 ### 3.1eCryptfs_open流程
 
-![img](v2-7cd329469e412451be6ee9b6f49b4115_720w.webp)
+![img](img/v2-7cd329469e412451be6ee9b6f49b4115_720w.webp)
 
 ecryptfs_open的函数调用流程如图所示，open函数主要功能是解析底层文件Head的metadata，从metadata中取出EFEK，通过kernel crypto解密得到FEK，保存在ecryptfs_crypt_stat结构体的key成员中，并初始化ecryptfs_crypt_stat对象，以便后续的读写加解密操作。具体的可以跟踪下ecryptfs_read_metadata函数的逻辑。
 
 \2. eCryptfs_read流程
 
-![img](v2-85d8e9d00c46c97ac4230874e1f3f37a_720w.webp)
+![img](img/v2-85d8e9d00c46c97ac4230874e1f3f37a_720w.webp)
 
 ecryptfs_decrypt_page()核心代码
 
-![img](v2-929af4d742e14597b1f9bd1a87e36d09_720w.webp)
+![img](img/v2-929af4d742e14597b1f9bd1a87e36d09_720w.webp)
 
 crypt_extent()核心代码
 
-![img](v2-1f78161f3aaa356150b062d7d03478c2_720w.webp)
+![img](img/v2-1f78161f3aaa356150b062d7d03478c2_720w.webp)
 
 ## **4、eCryptfs的缺点**
 
@@ -70,7 +70,7 @@ crypt_extent()核心代码
 
 ### 4.2安全隐患
 
-![img](v2-f7cc2141ab97eecb27bbd73279dcc8b0_720w.webp)
+![img](img/v2-f7cc2141ab97eecb27bbd73279dcc8b0_720w.webp)
 
 上面讲到，eCryptfs的Page cache中存放的是明文，如果用户空间的权限设置不当或被攻破，那么这段数据将会暴露给所有应用程序。这部分是使用者需要考虑优化的方向。
 
