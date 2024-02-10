@@ -14,7 +14,7 @@ Linux内核版本一般格式为：`x.y.zz-www `，例如：Kernel2.6.15
 
 Linux体系结构如下：
 
-<img src="kernel.jpg" width=60%>
+<img src="img/kernel.jpg" width=60%>
 
 几个重要概念：
 
