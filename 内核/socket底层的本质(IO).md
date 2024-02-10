@@ -31,7 +31,7 @@ struct sockaddr *src_addr,
 socklen_t *addrlen);
 ```
 
-![img](v2-5360be48b37f8ff02990e5ba9e691b40_720w.webp)
+![img](img/v2-5360be48b37f8ff02990e5ba9e691b40_720w.webp)
 
 ### 1.2非阻塞式 I/O
 
@@ -39,7 +39,7 @@ socklen_t *addrlen);
 
 由于 CPU 要处理更多的系统调用，因此这种模型的 CPU 利用率比较低。
 
-![img](v2-06d2b7a4c60fdee4d8c737523457510b_720w.webp)
+![img](img/v2-06d2b7a4c60fdee4d8c737523457510b_720w.webp)
 
 ### 1.3I/O 复用
 
@@ -49,7 +49,7 @@ socklen_t *addrlen);
 
 如果一个 Web 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。相比于多进程和多线程技术，I/O 复用不需要进程线程创建和切换的开销，系统开销更小。
 
-![img](v2-c81b85be36389bf6d3c1a3293afe2242_720w.webp)
+![img](img/v2-c81b85be36389bf6d3c1a3293afe2242_720w.webp)
 
 ### 1.4信号驱动 I/O
 
@@ -57,7 +57,7 @@ socklen_t *addrlen);
 
 相比于非阻塞式 I/O 的轮询方式，信号驱动 I/O 的 CPU 利用率更高。
 
-![img](v2-6a2d4905b2f02f2ffca3faa0ef70db3d_720w.webp)
+![img](img/v2-6a2d4905b2f02f2ffca3faa0ef70db3d_720w.webp)
 
 ### 1.5异步 I/O
 
@@ -65,7 +65,7 @@ socklen_t *addrlen);
 
 异步 I/O 与信号驱动 I/O 的区别在于，异步 I/O 的信号是通知应用进程 I/O 完成，而信号驱动 I/O 的信号是通知应用进程可以开始 I/O。
 
-![img](v2-cdb7b4db741402d81752e4651fddf5f1_720w.webp)
+![img](img/v2-cdb7b4db741402d81752e4651fddf5f1_720w.webp)
 
 ### 1.6五大 I/O 模型比较
 
@@ -76,7 +76,7 @@ socklen_t *addrlen);
 
 非阻塞式 I/O 、信号驱动 I/O 和异步 I/O 在第一阶段不会阻塞。
 
-![img](v2-ffb7600b9628204090b41550e4c967b5_720w.webp)
+![img](img/v2-ffb7600b9628204090b41550e4c967b5_720w.webp)
 
 ## 2、I/O 复用
 
