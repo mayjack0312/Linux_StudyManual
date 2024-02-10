@@ -1345,13 +1345,13 @@ echo remote_passwd | sudo -S cp /home/jinbo/xx.so /usr/lib/
 df -lh
 ```
 
-![](image-20230426173922685.png)
+![](img/image-20230426173922685.png)
 
 可以看到`/dev/sdd4`空间满了，对应的挂载目录是 `/`。
 
 进入该目录，执行`sudo ncdu`查看当前目录下目录占的空间大小。找到占用空间大的文件，删除即可。
 
-![](image-20230426173950054.png)
+![](img/image-20230426173950054.png)
 
 当磁盘空间未满时，依旧弹出`No space left on device`错误，这种情况下，很可能是小文件过多，导致 inode 急剧增加，消耗完 inode 区域的空间。
 
