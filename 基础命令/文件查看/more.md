@@ -1,0 +1,3 @@
+```bash
+more /etc/services
+```
