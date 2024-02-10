@@ -385,7 +385,7 @@ static int ext2_fill_super(struct super_block *sb, void *data, int silent)
 
 **下面给出ext2_fill_super之后ext2相关图解：**
 
-![img](v2-464f0a179a76ef8ee3283bced520126d_720w.webp)
+![img](img/v2-464f0a179a76ef8ee3283bced520126d_720w.webp)
 
 有了这些信息，虽然能够获得块设备上的文件系统全貌，内核也能通过已经建立好的block_device等结构访问块设备，但是用户进程不能真正意义上访问到，用户一般会通过open打开一个文件路径来访问文件，但是现在并没有关联挂载目录的路径，需要将文件系统关联到挂载点，以至于路径名查找的时候查找到挂载点后，在转向文件系统的根目录，而这需要通过do_new_mount_fc来去关联并加入全局的文件系统树中,下一篇我们将做详细讲解。**4、添加到全局文件系统树**
 
@@ -418,7 +418,7 @@ vfs_create_mount
 
 #### 4.2.1vfs_create_mount之后vfs对象数据结构之间关系图如下：
 
-![img](v2-eb423661d85acf15649569f9c4e0d804_720w.webp)
+![img](img/v2-eb423661d85acf15649569f9c4e0d804_720w.webp)
 
 ### **4.3lock_mount源码分析**
 
@@ -639,7 +639,7 @@ do_add_mount  //添加mount到全局的文件系统挂载树中
 
 #### 4.3.5do_add_mount 之后vfs对象数据结构之间关系图（/mnt之前不是挂载点情况）如下：
 
-![img](v2-72f3ca5ef905b57826560d45046eab94_720w.webp)
+![img](img/v2-72f3ca5ef905b57826560d45046eab94_720w.webp)
 
 ## **5、mount的应用**
 
@@ -706,13 +706,13 @@ walk_component
 
 ### **6.1mount、super_block、file_system_type三者关系图解**
 
-![img](v2-095bb1781dfa095aae41172484c23e3c_720w.webp)
+![img](img/v2-095bb1781dfa095aae41172484c23e3c_720w.webp)
 
 解释：mount实例、super_block实例、file_system_type实例三种层级逐渐升高，即一个file_system_type实例会包含多个super_block实例，一个super_block实例会包含多个mount实例。一种file_system_type必须先被注册到系统中来宣誓这种文件系统存在，主要提供此类文件系统的挂载和卸载方法等，注册即是加入全局的file_systems链表，等到有块设备上的文件系统要挂载时就会根据挂载时传递的文件系统类型名查找file_system_type实例，如果查找到，就会调用它的挂载方法进行挂载。首先，在file_systems实例的super_block链表中查找有没有super_block实例已经被创建，如果有就不需要从磁盘读取（这就是一个块设备上的文件系统挂载到多个目录上只有一个super_block实例的原因），如果没有从磁盘读取并加入对应的file_systems实例的super_block链表。而每次挂载都会创建一个mount实例来联系挂载点和super_block实例，并以（父vfsmount,挂载点dentry）为索引加入到全局mount哈希表，便于后面访问这个挂载点的文件系统时的路径名查找。
 
 ### **6.2父子文件系统挂载关系图解**
 
-![img](v2-c88da59ea00bb451ddceb1cbf060d59f_720w.webp)
+![img](img/v2-c88da59ea00bb451ddceb1cbf060d59f_720w.webp)
 
 解释：图中/dev/sda1中的子文件系统挂载到父文件系统的/mnt目录下。当挂载的时候会创建mount、super_block、跟inode、跟dentry四大数据结构并建立相互关系，将子文件系统的mount加入到(Vp, Dp3)二元组为索引的mount哈希表中，通过设置mnt的目录项（Dp3）的DCACHE_MOUNTED来将其标记为挂载点，并与父文件系统建立亲缘关系挂载就完成了。
 
@@ -720,7 +720,7 @@ walk_component
 
 ### **6.3单个文件系统多挂载点关系图解**
 
-![img](v2-8a4deddc3f1722a73f4d113b7d64ead8_720w.webp)
+![img](img/v2-8a4deddc3f1722a73f4d113b7d64ead8_720w.webp)
 
 解释：图中将/dev/sda1中的文件系统分别挂载到父文件系统的/mnt/a和/mnt/b目录下。当第一次挂载到/mnt/a时，会创建mount、super_block、跟inode、跟dentry四大数据结构(分别对应与Mc1、Sc、Dc1、Ic)并建立相互关系，将子文件系统的Mc1加入到(Vp, Dp3)二元组为索引的mount哈希表中，通过设置/mnt/a的目录项的DCACHE_MOUNTED来将其标记为挂载点，并与父文件系统建立亲缘关系挂载就完成了。然后挂载到/mnt/b时, Sc、Dc1、Ic已经创建好不需要再创建，内存中只会有一份，会创建Mc2来关联super_block和第二次的挂载点，建立这几个数据结构关系，将子文件系统的Mc2加入到(Vp, Dp4)二元组为索引的mount哈希表中，通过设置/mnt/b的目录项的DCACHE_MOUNTED来将其标记为挂载点，并与父文件系统建立亲缘关系挂载就完成了。
 
@@ -728,7 +728,7 @@ walk_component
 
 ### **6.4多文件系统单挂载点关系图解**
 
-![img](v2-03e69e56d7942f240dad3df406131303_720w.webp)
+![img](img/v2-03e69e56d7942f240dad3df406131303_720w.webp)
 
 解释：最后我们来看多文件系统单挂载点的情况，图中先将块设备/dev/sda1中的子文件系统1挂载到/mnt目录，然后再将块设备/dev/sdb1中的子文件系统2挂载到/mnt目录上。
 
