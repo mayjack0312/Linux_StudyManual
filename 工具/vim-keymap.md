@@ -1,6 +1,6 @@
 # 1. vi的模式
 
-<img src="vi-mode.png">
+<img src="img/vi-mode.png">
 
 ## 1.1. 普通模式
 
@@ -20,17 +20,17 @@
 
 # 2. vim命令汇总
 
-<img src="vi-vim-cheat-sheet.gif">
+<img src="img/vi-vim-cheat-sheet.gif">
 
 **高级汇总**
 
-<img src="vim-keymap.png">
+<img src="img/vim-keymap.png">
 
 # 3. vim命令分类
 
 ## 3.1. 基础编辑、移动光标
 
-<img src="vi-vim-tutorial-1.gif">
+<img src="img/vi-vim-tutorial-1.gif">
 
 | 指令     | 解释                                       |
 | :------- | :----------------------------------------- |
@@ -53,7 +53,7 @@
 
 ## 3.2. 操作和重复操作
 
-<img src="vi-vim-tutorial-2.gif">
+<img src="img/vi-vim-tutorial-2.gif">
 
 | 指令     | 解释                                                         |
 | :------- | :----------------------------------------------------------- |
@@ -72,7 +72,7 @@
 
 ## 3.3. 复制 和 粘贴
 
-<img src="vi-vim-tutorial-3.gif">
+<img src="img/vi-vim-tutorial-3.gif">
 
 | 指令 | 解释                                 |
 | :--- | :----------------------------------- |
@@ -87,7 +87,7 @@
 
 ## 3.4. 搜索
 
-<img src="vi-vim-tutorial-4.gif">
+<img src="img/vi-vim-tutorial-4.gif">
 
 | 指令 | 解释                                                         |
 | :--- | :----------------------------------------------------------- |
@@ -100,7 +100,7 @@
 
 ## 3.5. 标记 和 宏
 
-<img src="vi-vim-tutorial-5.gif">
+<img src="img/vi-vim-tutorial-5.gif">
 
 **标记**
 
@@ -125,7 +125,7 @@
 
 ## 3.6. 高级移动
 
-<img src="vi-vim-tutorial-6.gif">
+<img src="img/vi-vim-tutorial-6.gif">
 
 - `%` 在配对的 `()` `[]` 之间移动 
 
@@ -145,7 +145,7 @@
 
 ## 3.7. 高级指令
 
-<img src="vi-vim-tutorial-7.gif">
+<img src="img/vi-vim-tutorial-7.gif">
 
 - `J` 合并当前行与下一行。合并已选中的所有行。
 
@@ -168,4 +168,3 @@
 - `=` 格式化，一行，或多行
 
 - `~` 切换光标下的字符大小写
-
