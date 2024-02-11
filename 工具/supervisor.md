@@ -266,7 +266,7 @@ password=xxxx               ; default is no password (open server)
 
 具体如下：
 
-![](supervisor.png)
+![](img/supervisor.png)
 
 # 7. supervisor.conf详细配置
 
