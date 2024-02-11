@@ -12,19 +12,19 @@
 
 **四个LED灯的电路如下图所示：**
 
-![img](v2-614cfeecea624d60bcfd150387828214_720w.webp)
+![img](img/v2-614cfeecea624d60bcfd150387828214_720w.webp)
 
 **四个按键电路图如下所示：**
 
-![img](v2-f42013cca1e1d4acbdf4a01b6cf2fc42_720w.webp)
+![img](img/v2-f42013cca1e1d4acbdf4a01b6cf2fc42_720w.webp)
 
-![img](v2-09e73b394ae37b3209c7aa62b448c90f_720w.webp)
+![img](img/v2-09e73b394ae37b3209c7aa62b448c90f_720w.webp)
 
 **将LED灯的控制地址放入一个寄存器中，并将其设置为输出模式:**
 
-![img](v2-d5010fee1006340b9416d2b9038ab67b_720w.webp)
+![img](img/v2-d5010fee1006340b9416d2b9038ab67b_720w.webp)
 
-![img](v2-6b960d906551a8fdf50be58d586440d1_720w.webp)
+![img](img/v2-6b960d906551a8fdf50be58d586440d1_720w.webp)
 
 把按键控制地址的内容全置零，为输入模式（复位值为0，此步骤可省略）。
 
