@@ -8,7 +8,7 @@
 * sched_entity: 调度实体，包含负载权重值，对应红黑树节点，虚拟运行时vruntime等。
 * sched_class: 调度算法抽象成的调度类，包含一组通用的调度操作接口，将接口和实现分离。
 
-![image](127105320-a7646493-0a85-4467-b5a8-f10a5bb96942.png)
+![image](img/127105320-a7646493-0a85-4467-b5a8-f10a5bb96942.png)
 
 schedule函数的流程包括：
 
@@ -49,7 +49,7 @@ I/O消耗型 vs. CPU消耗型
 * 某个优先级有TASK_RUNNING进程，响应bit设置1。<br>
 * 调度第一个bitmap设置为1的进程
 
-![image](127105805-547271f8-e1d5-4236-a7dc-4bb0d6ef51ca.png)
+![image](img/127105805-547271f8-e1d5-4236-a7dc-4bb0d6ef51ca.png)
 
 #### SCHED_FIFO、SCHED_RR
 
@@ -58,7 +58,7 @@ I/O消耗型 vs. CPU消耗型
 * SCHED_FIFO： 不同优先级按照优先级高的先跑到睡眠，优先级低的再跑；同等优先级先进先出。
 * SCHED_RR：不同优先级按照优先级高的先跑到睡眠，优先级低的再跑；同等优先级轮转。
 
-![image](127105885-b0cf808e-2d8e-4dfc-82a3-cf1fdcd1486f.png)
+![image](img/127105885-b0cf808e-2d8e-4dfc-82a3-cf1fdcd1486f.png)
 
 当所有的SCHED_FIFO和SCHED_RR都运行至睡眠态，就开始运行 100～139之间的 普通task_struct。这些进程讲究 nice，
 
@@ -82,9 +82,9 @@ Linux内核在period的时间里RT最多只能跑runtime的时间。<br>
 
 红黑树，左边节点小于右边节点的值，运行到目前为止 （vruntime最小）的进程，同时考虑了CPU/IO和nice。
 
-![image](127106097-30790100-6fa1-4af4-ba7a-bc4e7ce0c336.png)
+![image](img/127106097-30790100-6fa1-4af4-ba7a-bc4e7ce0c336.png)
 
-![image](127106110-7eb7a50d-fdcd-45f2-9919-9a4ec58061fc.png)
+![image](img/127106110-7eb7a50d-fdcd-45f2-9919-9a4ec58061fc.png)
 
 vruntime: virtual runtime，＝ pruntime/weight 权重* 系数。
 
