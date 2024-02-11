@@ -18,7 +18,7 @@
 
 ## 1.3. 网络构成
 
-<img src="network.png" width="80%">
+<img src="img/network.png" width="80%">
 
 | 构成要素         | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ |
@@ -33,15 +33,15 @@
 
 ## 2.1. OSI与TCP/IP参考模型图
 
-<img src="TCPIP-OSI.png" width=80%>
+<img src="img/TCPIP-OSI.png" width=80%>
 
 ## 2.2. OSI参考模型分层说明
 
-<img src="osi-function.png" width=80%>
+<img src="img/osi-function.png" width=80%>
 
 ## 2.3. OSI参考模型通信过程
 
-<img src="OSI.png" width=80%>
+<img src="img/OSI.png" width=80%>
 
 
 1、打包数据时，每一层在处理上一层传过来的数据时，会在数据上附上当前层的首部信息后传给下一层；
@@ -64,34 +64,34 @@
 
 ### 2.4.1. 通信模型
 
-<img src="TrafficModel.png" width=100%>
+<img src="img/TrafficModel.png" width=100%>
 
 ### 2.4.2. 应用层协议说明
 
 | 应用类型 | 协议       | 协议说明                                                     |
 | -------- | ---------- | ------------------------------------------------------------ |
-| WWW      | HTTP,HTML  | <img src="www.png" width=100%> |
-| 电子邮件 | SMTP，MIME | <img src="email.png" width=100%> |
-| 文件传输 | FTP        | <img src="ftp.png" width=100%> |
-| 远程登录 | TELNET,SSH | <img src="telnet.png" width=100%> |
-| 网络管理 | SNMP,MIB   | <img src="snmp.png" width=100%> |
+| WWW      | HTTP,HTML  | <img src="img/www.png" width=100%> |
+| 电子邮件 | SMTP，MIME | <img src="img/email.png" width=100%> |
+| 文件传输 | FTP        | <img src="img/ftp.png" width=100%> |
+| 远程登录 | TELNET,SSH | <img src="img/telnet.png" width=100%> |
+| 网络管理 | SNMP,MIB   | <img src="img/snmp.png" width=100%> |
 
 # 3. TCP/IP通信过程
 
 ## 3.1. 数据包结构
 
-<img src="data-package.png" width=100%>
+<img src="img/data-package.png" width=100%>
 
 ## 3.2. 数据打包和解包过程
 
 ### 3.2.1. 包的封装
 
-<img src="package.png" width=80%> 
+<img src="img/package.png" width=80%> 
 
 ### 3.2.2. 发送与接收
 
-<img src="send-receive.png" width=70%>
+<img src="img/send-receive.png" width=70%>
 
 ## 3.3. 数据包传输过程
 
-<img src="transmission.png" width=80%>
+<img src="img/transmission.png" width=80%>
