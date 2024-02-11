@@ -3,11 +3,11 @@ Linux®操作系统的最大功能之一是其网络栈。它最初是BSD协议�
 ## 协议介绍
 虽然网络的正式介绍通常是指七层开放系统互连（OSI）模型，但是Linux中基本网络栈的介绍使用互联网模型的四层模型（参见图1）。
 
-![img.gif](9b8c1e58a2635777.gif)
+![img.gif](img/9b8c1e58a2635777.gif)
 
 网络栈的底部是链路层。链路层是指提供访问物理层的设备驱动程序（物理层可以是各种各样的介质，诸如串行链路或以太网设备）。链路层上面是网络层，负责将数据包引导到目的地。再上一层是传输层，它负责点对点通信（例如，在主机内，像ssh 127.0.0.1）。网络层管理主机之间的通信，传输层管理这些主机之上的端点(Endpoint)之间的通信。最后是应用层，即可以理解所传输的数据的语义层。
 
-![img.gif](4f4d9339d4d41d04.gif)
+![img.gif](img/4f4d9339d4d41d04.gif)
 
 ## 核心网络架构
 
@@ -129,7 +129,7 @@ static struct inet_protosw inetsw_array[] =
 
 您可以通过linux/net/ipv4/中的文件tcp_ipv4.c，udp.c和raw.c中的proto结构来了解各自的协议。这些协议的proto结构体都按照类型和协议映射到inetsw_array，将内部协议映射到对应的操作(which maps the built-in protocols to their operations.)。结构体inetsw_array及其关系如图3所示。该数组中的每个协议都在初始化inetsw时，通过在inet_init调用inet_register_protosw来初始化。函数inet_init还初始化各种inet模块，如ARP，ICMP，IP模块，TCP和UDP模块。
 
-![img.gif](c873d2571911b87d.gif)
+![img.gif](img/c873d2571911b87d.gif)
 
 #### Socket协议关联
 
@@ -164,7 +164,7 @@ SYSCALL_DEFINE3(connect, int, fd, struct sockaddr __user *, uservaddr,
 
 socket的数据移动使用核心结构socket缓冲区（sk_buff）来进行。一个sk_buff 包含包数据(package data)，和状态数据（state data, 覆盖协议栈的多个层）。每个发送或接收的数据包都用一个sk_buff来表示。该sk_buff 结构是在linux/include/linux/skbuff.h中定义的，并在图4中示出。
 
-![img.gif](fc2656d15ac4256d.gif)
+![img.gif](img/fc2656d15ac4256d.gif)
 
 
 如图所示，一个给定连接的多个sk_buff可以串联在一起。每个sk_buff标识了要发送数据包或从其接收数据包的设备结构`（net_device *dev）`。由于每个包都表示为一个sk_buff，数据包报头可方便地通过一组指针来寻址（th，iph以及mac（MAC报头）），内核会保证这块内存是连续的。由于sk_buff 是socket数据管理的核心，因此kernel已经创建了许多支撑函数来管理它们，包括sk_buff的创建和销毁，克隆和队列管理等函数。
