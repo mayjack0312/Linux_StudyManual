@@ -10,9 +10,9 @@ Linux64位操作系统仅使用低47位，高17位做扩展（只能是全0或�
 
 user space 也就是用户区由以下几部分组成：**代码段，数据段，BSS段，heap，stack**
 
-<img src="2138374-20200828154940757-1842339641.png" alt="img" style="zoom: 67%;" />
+<img src="img/2138374-20200828154940757-1842339641.png" alt="img" style="zoom: 67%;" />
 
-<img src="2138374-20200828155103154-1191841853.jpg" alt="img" style="zoom: 67%;" />
+<img src="img/2138374-20200828155103154-1191841853.jpg" alt="img" style="zoom: 67%;" />
 
 由下文的程序打印结果来看，stack空间变量地址，往变小处增长，堆空间地址往变大处增长。但栈地址大于堆地址。
 
@@ -144,7 +144,7 @@ https://www.zhihu.com/question/22444939/answer/22200552
 
 ### 进程有哪几种状态？
 
-<img src="process3states.jpg" style="zoom:50%;" />
+<img src="img/process3states.jpg" style="zoom:50%;" />
 
 - 运行状态：占用 CPU 资源正在运行；
 - 就绪状态：可运行，但因为其他进程正在运行而暂时停止；
