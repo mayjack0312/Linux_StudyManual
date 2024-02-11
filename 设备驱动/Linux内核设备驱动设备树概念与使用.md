@@ -4,7 +4,7 @@
 
 设备树(Device Tree)，将这个词分开就是“设备”和“树”，描述设备树的文件叫做 DTS(DeviceTree Source)，这个 DTS 文件采用树形结构描述板级设备，也就是开发板上的设备信息，比如CPU 数量、 内存基地址、 IIC 接口上接了哪些设备、 SPI 接口上接了哪些设备等等，如图 所示：
 
-![img](v2-8c62b3fc1d129b2298119383693a465a_720w.webp)
+![img](img/v2-8c62b3fc1d129b2298119383693a465a_720w.webp)
 
 在图中，树的主干就是系统总线， IIC 控制器、 GPIO 控制器、 SPI 控制器等都是接到系统主线上的分支。IIC 控制器有分为 IIC1 和 IIC2 两种，其中 IIC1 上接了 FT5206 和 AT24C02这两个 IIC 设备， IIC2 上只接了 MPU6050 这个设备。 DTS 文件的主要功能就是按照图所示的结构来描述板子上的设备信息， DTS 文件描述设备信息是有相应的语法规则要求的，稍后我们会详细的讲解 DTS 语法规则。
 
@@ -28,7 +28,7 @@ Linus发火之后，内核开始全面使用设备树来改造，神人就神人
 
 一个单板启动时，u-boot先运行，它的作用是启动内核。U-boot会把内核和设备树文件都读入内存，然后启动内核。在启动内核时会把设备树在内存中的地址告诉内核。
 
-![img](v2-c6f80070f43787af7d164bde5229a005_720w.webp)
+![img](img/v2-c6f80070f43787af7d164bde5229a005_720w.webp)
 
 ### 1.3设备树名词关系
 
@@ -189,7 +189,7 @@ model用来准确地定义这个硬件是什么。
 
 dtsi文件中定义了很多设备，但是在你的板子上某些设备是没有的。这时你可以给这个设备节点添加一个status属性，设置为“disabled”：
 
-![img](v2-4f3750a5c508253e807e6c870ee44b7b_720w.webp)
+![img](img/v2-4f3750a5c508253e807e6c870ee44b7b_720w.webp)
 
 ### 2.6reg
 
@@ -325,11 +325,11 @@ make dtbs
 
 #### 4.1.1测试节点编写
 
-![img](v2-58cceeabd35a47fd5b9370fbb07f249b_720w.webp)
+![img](img/v2-58cceeabd35a47fd5b9370fbb07f249b_720w.webp)
 
 #### 4.1.2编译dtbs
 
-![img](v2-ffeb86495e0de8b85a4cc9bcae7f20bc_720w.webp)
+![img](img/v2-ffeb86495e0de8b85a4cc9bcae7f20bc_720w.webp)
 
 ### 4.3通过配置tftp boot
 
@@ -344,9 +344,9 @@ saveenv
 
 ### 4.4板子启动后查看设备树信息
 
-![img](v2-2c42456af3559c855d1654a38618fa0b_720w.webp)
+![img](img/v2-2c42456af3559c855d1654a38618fa0b_720w.webp)
 
-![img](v2-586e07a65c8d7e8e2e751e50b9ea9cbb_720w.webp)
+![img](img/v2-586e07a65c8d7e8e2e751e50b9ea9cbb_720w.webp)
 
 ## 5、内核操作设备树的函数
 
