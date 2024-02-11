@@ -1,6 +1,6 @@
 网卡接收和发过数据在 Linux 内核中的处理过程，我们先来回顾一下网卡接收和发送数据的过程，如 图1 所示：
 
-![img](v2-fa1a3a8338e1d40aed2ef2a1ddcb016c_720w.webp)
+![img](img/v2-fa1a3a8338e1d40aed2ef2a1ddcb016c_720w.webp)
 
 图1 网卡接收和发送数据过程
 
@@ -57,7 +57,7 @@ int netif_rx(struct sk_buff *skb)
 
 - `netif_rx` 函数的处理过程如 图2 所示：
 
-![img](v2-9f87cfe85f20c5650cf38a5b0dc78d0f_720w.webp)
+![img](img/v2-9f87cfe85f20c5650cf38a5b0dc78d0f_720w.webp)
 
 图2 netif_rx 函数的处理过程
 
@@ -143,7 +143,7 @@ static struct packet_type ip_packet_type = {
 
 - 所以，`net_rx_action` 函数主要从待处理队列中获取数据包，然后根据数据包的网络层协议类型，找到相应的处理接口处理数据包。其过程如 图3 所示：
 
-![img](v2-412eb9041d2bcdf4e23f28fe7578b639_720w.webp)
+![img](img/v2-412eb9041d2bcdf4e23f28fe7578b639_720w.webp)
 
 - 从上图可知，`net_rx_action` 函数将数据包交由网络层协议处理接口后就不管了，而网络层协议处理接口接管数据包后，会对数据包进行进一步处理，如判断数据包的合法性（数据包是否损坏、数据包是否发送给本机）。如果数据包是合法的，就会交由传输层协议处理接口处理。
 
@@ -151,7 +151,7 @@ static struct packet_type ip_packet_type = {
 
 - 而网络中断下半部处理由 `net_rx_action` 函数完成的，其主要功能就是从待处理队列中获取一个数据包，然后根据数据包的网络层协议类型来找到相应的处理接口来处理数据包。我们通过 图1 来展示 `net_rx_action` 函数的处理过程：
 
-![img](v2-25a34cbac94390750fa9c8adbf3baa9a_720w.webp)
+![img](img/v2-25a34cbac94390750fa9c8adbf3baa9a_720w.webp)
 
 图1 net_rx_action 处理过程
 
