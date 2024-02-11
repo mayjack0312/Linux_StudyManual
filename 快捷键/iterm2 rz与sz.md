@@ -101,7 +101,7 @@ Instant: checked
 
 示例图：
 
-<img src="01.png">
+<img src="img/01.png">
 
 ## 5. 使用
 
