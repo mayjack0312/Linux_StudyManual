@@ -39,7 +39,7 @@ linux-1.2.13
 
 ## 网络分层
 
-![image](127823943-b37924f6-27d0-4117-bf03-94c1feed898e.png)
+![image](img/127823943-b37924f6-27d0-4117-bf03-94c1feed898e.png)
 
 从这个图中，可以看到，到传输层时，横生枝节，代码不再针对任何数据包都通用。从下到上，收到的数据包由哪个传输层协议处理，根据从数据包传输层header中解析的数据确定。从上到下，数据包的发送使用什么传输层协议，由socket初始化时确定。
 
@@ -51,17 +51,17 @@ linux-1.2.13
 6、link 层，先寻找下一跳（ip ==> mac），有了 MAC 地址，就可以调用 dev_queue_xmit发送二层网络包了，它会调用 `__dev_xmit_skb` 会将请求放入块设备的队列。同时还会处理一些vlan 的逻辑<br>
 7、设备层：网卡是发送和接收网络包的基本设备。在系统启动过程中，网卡通过内核中的网卡驱动程序注册到系统中。而在网络收发过程中，内核通过中断跟网卡进行交互。网络包的发送会触发一个软中断 NET_TX_SOFTIRQ 来处理队列中的数据。这个软中断的处理函数是 net_tx_action。在软中断处理函数中，会将网络包从队列上拿下来，调用网络设备的传输函数 ixgb_xmit_frame，将网络包发的设备的队列上去。<br>
 
-![image](127824109-173a79ab-e425-4216-853f-7000452367a1.png)
+![image](img/127824109-173a79ab-e425-4216-853f-7000452367a1.png)
 
 网卡中断处理程序为网络帧分配的，内核数据结构 sk_buff 缓冲区；是一个维护网络帧结构的双向链表，链表中的每一个元素都是一个网络帧（Packet）。**虽然 TCP/IP 协议栈分了好几层，但上下不同层之间的传递，实际上只需要操作这个数据结构中的指针，而无需进行数据复制。**
 
 ## 网络与文件操作
 
-![image](127824190-536fcd2c-2f6e-46e3-83e3-37ef196eaf85.png)
+![image](img/127824190-536fcd2c-2f6e-46e3-83e3-37ef196eaf85.png)
 
 VFS为文件系统抽象了一套API，实现了该系列API就可以把对应的资源当作文件使用，当调用socket函数的时候，我们拿到的不是socket本身，而是一个文件描述符fd。
 
-![vfs_socket](127825319-af472153-7bca-4b09-aaf2-b5e9510da847.jpg)
+![vfs_socket](img/127825319-af472153-7bca-4b09-aaf2-b5e9510da847.jpg)
 
 从linux5.9看网络层的设计整个网络层的实际中，主要分为socket层、af_inet层和具体协议层（TCP、UDP等）。当使用网络编程的时候，首先会创建一个socket结构体（socket层），socket结构体是最上层的抽象，然后通过协议簇类型创建一个对应的sock结构体，sock是协议簇抽象（af_inet层），同一个协议簇下又分为不同的协议类型，比如TCP、UDP（具体协议层），然后根据socket的类型（流式、数据包）找到对应的操作函数集并赋值到socket和sock结构体中，后续的操作就调用对应的函数就行，调用某个网络函数的时候，会从socket层到af_inet层，af_inet做了一些封装，必要的时候调用底层协议（TCP、UDP）对应的函数。而不同的协议只需要实现自己的逻辑就能加入到网络协议中。
 
@@ -170,7 +170,7 @@ struct sk_buff_head {
 };
 ```
 
-![image](127826103-2dc25fa6-18cb-4bd8-9403-350d58bdb276.png)
+![image](img/127826103-2dc25fa6-18cb-4bd8-9403-350d58bdb276.png)
 
 ### 网络协议栈实现——数据struct 和 协议struct
 
@@ -190,7 +190,7 @@ udp.c
 datalink.h		// 应该是数据链路层
 ```
 
-![image](127825711-917c868a-8952-4e18-ba55-ad3875b16c2b.png)
+![image](img/127825711-917c868a-8952-4e18-ba55-ad3875b16c2b.png)
 
 怎么理解整个表格呢？协议struct和数据struct有何异同？
 
@@ -213,9 +213,9 @@ tcp_protocol是为了从下到上的数据接收，其函数集主要是handler�
 
 ## 面向过程/对象/ioc
 
-![image](127826202-cb5b77da-c922-47db-a468-f53917545859.png)
+![image](img/127826202-cb5b77da-c922-47db-a468-f53917545859.png)
 
-![image](127826240-9b0eef69-436f-4c1c-84bb-df0a53970449.png)
+![image](img/127826240-9b0eef69-436f-4c1c-84bb-df0a53970449.png)
 
 重要的不是细节，这个过程让我想到了web编程中的controller,service,dao。都是分层，区别是web请求要立即返回，网络通信则不用。
 
@@ -223,7 +223,7 @@ mac ==> device ==> ip_rcv ==> tcp_rcv ==> 上层<br>
 url ==> controller ==> service ==> dao ==> 数据库<br>
 想一想，整个网络协议栈，其实就是一群loopbackController、eth0Controller、ipService、TcpDao组成，该是一件多么有意思的事。
 
-![image](127825930-b1b7ed90-9d6a-4a3b-aa0d-ed07f744ef55.png)
+![image](img/127825930-b1b7ed90-9d6a-4a3b-aa0d-ed07f744ef55.png)
 
 ## 其它
 
