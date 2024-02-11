@@ -25,7 +25,7 @@ fs 成员：描述文件系统资源<br>
 files 成员：进程运行时打开了多少文件，fd的数组<br>
 signal 成员：进程接收的信号资源<br>
 
-![image](127093984-949e7c2a-e29b-495f-a88d-437b84008205.png)
+![image](img/127093984-949e7c2a-e29b-495f-a88d-437b84008205.png)
 
 Linux通过slab分配器分配task_struct结构，只需在栈底创建新的结构，struct thread_info。<br>
 每个任务的thread_info结构在它的内核栈的尾端分配。
@@ -42,7 +42,7 @@ task_struct被管理<br>
 
 ### Linux进程生命周期（就绪、运行、睡眠、停止、僵死）
 
-![image](127104656-fbe9cbad-c4bf-4ba2-9635-f502240198b8.png)
+![image](img/127104656-fbe9cbad-c4bf-4ba2-9635-f502240198b8.png)
 
 ### 进程、线程、协程
 在linux系统里，进程和线程都是通过task_struct结构体来描述。
@@ -79,7 +79,7 @@ ctrl+z ，fg/bg
 
 ### 进程的睡眠
 
-![image](127094157-01f55c77-f53b-4b59-97b8-7f69347227c2.png)
+![image](img/127094157-01f55c77-f53b-4b59-97b8-7f69347227c2.png)
 
 深睡眠 和 浅睡眠，都是自发的。停止态是被动的。
 
