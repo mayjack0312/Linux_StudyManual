@@ -44,7 +44,7 @@
 
 上面提到大8个寄存器都有其特定的用途，我们以32位 CPU 为例简单说明下这些寄存器的作用，整理如下表：
 
-![img](v2-55215e20944d5e1a161253e73eddaa07_720w.webp)
+![img](img/v2-55215e20944d5e1a161253e73eddaa07_720w.webp)
 
 ## 寄存器EAX、AX、AH、AL的关系
 
@@ -64,29 +64,29 @@
 
 **数据传送指令**
 
-![img](v2-b07d3b818f23726324ea8bf8b4285fc8_720w.webp)
+![img](img/v2-b07d3b818f23726324ea8bf8b4285fc8_720w.webp)
 
 **算术运算指令**
 
-![img](v2-53d1634b99b2b1138880c5bd15aeb5f7_720w.webp)
+![img](img/v2-53d1634b99b2b1138880c5bd15aeb5f7_720w.webp)
 
 **逻辑运算指令**
 
-![img](v2-e338b2f72046695650f87da0fc156fd4_720w.webp)
+![img](img/v2-e338b2f72046695650f87da0fc156fd4_720w.webp)
 
 **循环控制指令**
 
-![img](v2-fab8c1d3ed5c2ada334bd6c9cc71e6fb_720w.png)
+![img](img/v2-fab8c1d3ed5c2ada334bd6c9cc71e6fb_720w.png)
 
 **循环控制指令**
 
-![img](v2-38df884cc758cc13e540fdd5be9ceee4_720w.webp)
+![img](img/v2-38df884cc758cc13e540fdd5be9ceee4_720w.webp)
 
 **linux 和 windows 下汇编的区别**
 
 前面说到 linux 和 windows 下面的汇编语法是不同的，其实两种语法的不同和系统不同没有绝对的关系，一般在 linux 上会使用 gcc/g++ 编译器，而在 windows 上会使用微软的 cl 也就是 MSBUILD，所以产生不同的代码是因为编译器不同，gcc 下采用的是AT&T的汇编语法格式，MSBUILD 采用的是Intel汇编语法格式。
 
-![img](v2-3a8b07ae4490e7fdfe5984df4f004cd3_720w.webp)
+![img](img/v2-3a8b07ae4490e7fdfe5984df4f004cd3_720w.webp)
 
 **总结**
 
