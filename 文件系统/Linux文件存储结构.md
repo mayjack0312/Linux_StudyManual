@@ -36,7 +36,7 @@ stat demo.txt
 
 请看文件存储结构示意图：
 
-![img](linux-storage.png)
+![img](img/linux-storage.png)
 
 ### 1.1. inode的大小
 
