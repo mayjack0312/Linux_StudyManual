@@ -68,11 +68,11 @@ struct task_struct {
 
 查阅相关资料后，对Linux中进程的生命周期总结如下：
 
-![image](127657434-bfca795a-6388-486a-bae9-f66d4eff8b9e.png)
+![image](img/127657434-bfca795a-6388-486a-bae9-f66d4eff8b9e.png)
 
 从图上可以看出，进程的睡眠状态是最多的，那进程一般在何时进入睡眠状态呢？答案是I/O操作时，因为I/O操作的速度与CPU运行速度相比，相差太大，所以此时进程会释放CPU，进入睡眠状态。
 
-![image](127657493-bb1839f9-d6f1-4f6e-8259-4bbd27104026.png)
+![image](img/127657493-bb1839f9-d6f1-4f6e-8259-4bbd27104026.png)
 
 进程状态相关的定义同样在 include/linux/sched.h 文件的开头部分，以 #define TASK_KILLABLE (TASK_WAKEKILL | TASK_UNINTERRUPTIBLE) 为例，TASK_WAKEKILL表示用于在接收到致命信号时唤醒进程，将它与 TASK_UNINTERRUPTIBLE 按位或，就得到了 TASK_KILLABLE。代码注释中提到了 fs/proc/array.c，所以也将其代码贴出，作为补充。
 
