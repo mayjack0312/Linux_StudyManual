@@ -1,6 +1,6 @@
 ## Linux内核针对不同并发场景的工具实现
 
-![image](127649604-761ead2e-8c72-4876-a52f-8310f3c3b49c.png)
+![image](img/127649604-761ead2e-8c72-4876-a52f-8310f3c3b49c.png)
 
 ### atomic 原子变量
 
@@ -36,7 +36,7 @@ linux为解决cpu 各自使用的L2 cache 数据与内存中的不一致的问�
 
 用于解决多个CPU同时读写共享数据的场景。它允许多个CPU同时进行写操作，不使用锁，并且实现垃圾回收来处理旧数据。
 
-![image](127649772-3121520b-8989-4176-a472-43719b64eb10.png)
+![image](img/127649772-3121520b-8989-4176-a472-43719b64eb10.png)
 
 ### 内存屏障 memory-barrier
 
@@ -68,13 +68,13 @@ I/O模型很难说好与坏，只能说在某些场景下，更适合某些IO模
 
 蓝色代表：cpu，红色代表：io
 
-![image](127649947-6c89dd89-5076-4aca-af0a-69f154cf26b4.png)
+![image](img/127649947-6c89dd89-5076-4aca-af0a-69f154cf26b4.png)
 
 如上图，某个应用打开一个图片文件，先需要100ms初始化，接下来100ms读这个图片。那打开这个图片就需要200ms。
 
 但是 是否可以开两个线程，同时做这两件事？
 
-![image](127649983-79730c12-91e9-462f-8abf-5fbf9634bd08.png)
+![image](img/127649983-79730c12-91e9-462f-8abf-5fbf9634bd08.png)
 
 如上图，网络收发程序，如果串行执行，CPU和IO会需要互相等待。<br>
 为什么CPU和IO可以并行？因为一般硬件，IO通过DMA，cpu消耗比较小，在硬件上操作的时间更长。CPU和硬盘是两个不同的硬件。
@@ -82,13 +82,13 @@ I/O模型很难说好与坏，只能说在某些场景下，更适合某些IO模
 再比如开机加速中systemd使用的readahead功能:<br>
 第一次启动过程，读的文件，会通过Linux inotify监控linux内核文件被操作的情况，记录下来。第二次启动，后台有进程直接读这些文件，而不是等到需要的时候再读。
 
-![image](127650021-0bed9b00-4448-4c7a-b9a4-ccff573a50ea.png)
+![image](img/127650021-0bed9b00-4448-4c7a-b9a4-ccff573a50ea.png)
 
 I/O模型会深刻影响应用的最终性能，阻塞 & 非阻塞 、异步 IO 是针对硬盘， 多路复用、signal io、libevent 是针对字符设备和 socket。
 
 ### 简单的IO模型
 
-![image](127650047-8bb138e2-f652-4115-8ea6-0498b3e1be1a.png)
+![image](img/127650047-8bb138e2-f652-4115-8ea6-0498b3e1be1a.png)
 
 当一个进程需要读 键盘、触屏、鼠标时，进程会阻塞。但对于大量并发的场景，阻塞IO无法搞定，也可能会被信号打断。
 
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
 }
 ```
 
-![image](127650094-8544cd30-d8de-4773-8a5c-b5d865115dce.png)
+![image](img/127650094-8544cd30-d8de-4773-8a5c-b5d865115dce.png)
 
 一个阻塞的IO，在睡眠等IO时Ready，但中途被信号打断，linux响应信号，read/write请求阻塞。<br>
 配置信号时，在SA_FLAG是不是加“自动”，SA_RESTART指定 被阻塞的IO请求是否重发，并且应用中可以捕捉。加了SA_RESTART重发，就不会返回出错码EINTR。<br>
@@ -149,11 +149,11 @@ int main(int argc, char **argv)
 
 但Linux中有一些系统调用，即便你加了自动重发，也不能自动重发。man signal.
 
-![image](127650145-bcad6c25-0a99-4158-af47-7ead22941fb2.png)
+![image](img/127650145-bcad6c25-0a99-4158-af47-7ead22941fb2.png)
 
 当使用阻塞IO时，要小心这部分。
 
-![image](127650167-86e622e8-4e04-437d-9e29-aa3cacc78968.png)
+![image](img/127650167-86e622e8-4e04-437d-9e29-aa3cacc78968.png)
 
 ### 多进程、多线程模型
 
@@ -167,7 +167,7 @@ IO多路复用，则是解决以上问题的场景。
 
 ### 多路复用
 
-![image](127650193-d91a7751-d9be-43e4-ace1-d153f18d82e7.png)
+![image](img/127650193-d91a7751-d9be-43e4-ace1-d153f18d82e7.png)
 
 #### select
 
@@ -189,9 +189,9 @@ epoll ：在内核中的实现不是通过轮询的方式，而是通过注册ca
 1、select的“健忘症”，一返回就不记得关注了多少fd。api 把告诉内核等哪些文件，和最终监听哪些文件，都是同一个api。而epoll，告诉内核等哪些文件 和具体等哪些文件分开成两个api，epoll的“等”返回后，还是知道关注了哪些fd。<br>
 2、select在返回后的维护开销很大，而epoll就可以直接知道需要等fd。
 
-![image](127650306-b4419ff5-164e-4678-80f4-6f839ad44245.png)
+![image](img/127650306-b4419ff5-164e-4678-80f4-6f839ad44245.png)
 
-![image](127650321-094aa0ad-c49b-46d9-8100-4b7c3cc60f53.png)
+![image](img/127650321-094aa0ad-c49b-46d9-8100-4b7c3cc60f53.png)
 
 epoll获取事件的时候，无须遍历整个被侦听的描述符集，只要遍历那些被内核I/O事件异步唤醒而加入就绪队列的描述符集合。
 
@@ -199,7 +199,7 @@ epoll_create: 创建epoll池子。<br>
 epoll_ctl：向epoll注册事件。告诉内核epoll关心哪些文件，让内核没有健忘症。<br>
 epoll_wait：等待就绪事件的到来。专门等哪些文件，第2个参数 是输出参数，包含满足的fd，不需要再遍历所有的fd文件。<br>
 
-![image](127650368-39c111d9-a074-4f0b-befd-3c0e9a29867b.png)
+![image](img/127650368-39c111d9-a074-4f0b-befd-3c0e9a29867b.png)
 
 如上图，epoll在CPU的消耗上，远低于select，这样就可以在一个线程内监控更多的IO。
 
@@ -267,15 +267,15 @@ int main()
 
 目前在linux中很少被用到，Linux内核某个IO事件ready，通过kill出一个signal，应用程序在signal IO上绑定处理函数。
 
-![image](127650438-dafaa967-0eb9-4886-9a90-4200fd3d2708.png)
+![image](img/127650438-dafaa967-0eb9-4886-9a90-4200fd3d2708.png)
 
 kernel发现设备读写事件变化，调用一个 kill fa_sync ，应用程序绑定signal_io上的事件。
 
-![image](127650461-1e5fc79c-496e-4c7e-a1d4-dfa0c922644e.png)
+![image](img/127650461-1e5fc79c-496e-4c7e-a1d4-dfa0c922644e.png)
 
 #### 异步IO
 
-![image](127650494-6b63c04c-7b7e-4afa-9f8e-d37f36046651.png)
+![image](img/127650494-6b63c04c-7b7e-4afa-9f8e-d37f36046651.png)
 
 Linux中
 
@@ -285,10 +285,10 @@ Linux中
 
 #### libevent
 
-![image](127650540-a0005da6-290f-464a-a14b-f05088b9c9d8.png)
+![image](img/127650540-a0005da6-290f-464a-a14b-f05088b9c9d8.png)
 
 就像MFC一样，界面上的按钮，VC会产生一个on_button，调对应的函数。是一种典型的事件循环。
 
 本质上还是用了epoll，只是基于事件编程。
 
-![image](127650560-697e2b4e-61ab-4e43-960f-67d6f2aa2b1a.png)
+![image](img/127650560-697e2b4e-61ab-4e43-960f-67d6f2aa2b1a.png)
