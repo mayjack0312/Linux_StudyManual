@@ -4,7 +4,7 @@
 
 其次，在 epoll_wait时，也不是把current轮流的加入fd对应的设备等待队列，而是在设备等待队列醒来时调用一个回调函数（当然，这就需要“唤醒回调”机制），把产生事件的fd归入一个链表，然后返回这个链表上的fd。另外，epoll机制实现了自己特有的文件系统eventpoll filesystem。
 
-![image](127447306-89bb9b00-174d-4f38-9e9b-a39e3e152f89.png)
+![image](img/127447306-89bb9b00-174d-4f38-9e9b-a39e3e152f89.png)
 
 ## epoll初始化
 
@@ -115,7 +115,7 @@ struct eventpoll {
 };
 ```
 
-![image](127447515-829c67df-666a-4f50-a8b0-46ab79696766.png)
+![image](img/127447515-829c67df-666a-4f50-a8b0-46ab79696766.png)
 
 ## 函数调用关系
 ### epoll_create
@@ -609,4 +609,4 @@ ep_send_events()函数向用户空间发送就绪事件。
 
 ep_send_events()函数将用户传入的内存简单封装到ep_send_events_data结构中，然后调用ep_scan_ready_list()将就绪队列中的事件传入用户空间的内存。 用户空间访问这个结果，进行处理。
 
-![image](127447425-3e1c4037-b5b3-49fa-b483-bda69bd33f7d.png)
+![image](img/127447425-3e1c4037-b5b3-49fa-b483-bda69bd33f7d.png)
