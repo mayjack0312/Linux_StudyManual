@@ -130,4 +130,4 @@ Detaching from program: /home/cxhpc/jinbo/nccl/mpi/test_mpi, process 999754
 
 终端输出结果如下图，可以看到服务器76.3打印y=100的时候，gdb attach 上去，此时另一台服务器 76.4 依旧在运行，因为是在服务器 76.3 上 attach  进程的，导致该进程被 gdb 接管。现在修改服务器 76.3 上的进程的 flag=1，使其退出 while 循环，可以看到76.3 上的进程比76.4上的进程先执行完。
 
-![image](image-20230414155534066.png)
+![image](img/image-20230414155534066.png)
