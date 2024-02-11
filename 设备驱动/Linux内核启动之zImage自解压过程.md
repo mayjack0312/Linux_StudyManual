@@ -22,13 +22,13 @@ arm-linux-xxx-objdump –d vmlinux > vmlinux.dis
 
 在piggy.gz的结尾四个字节表示的是 Image 镜像的大小，并且是以小端格式存放的。下面我们验证一下：
 
-![img](v2-3668c9d91b4e32ac2f7e76e2325fa340_720w.png)
+![img](img/v2-3668c9d91b4e32ac2f7e76e2325fa340_720w.png)
 
 可以看到，Image的大小是6806148B，十六进制值就是67DA84，接下来看看piggy.gz的结尾：
 
-![img](v2-4c4d80504e931db15b4c772ea4a8a83a_720w.webp)
+![img](img/v2-4c4d80504e931db15b4c772ea4a8a83a_720w.webp)
 
-![img](v2-195629b07facdc2f50d041e0c082a02b_720w.webp)
+![img](img/v2-195629b07facdc2f50d041e0c082a02b_720w.webp)
 
 可以看到，确实是将0x67DA84以小端的格式存放在了piggy.gz的结尾四字节中了。
 
@@ -686,4 +686,4 @@ decompress
 
 为了便于理解，可以参考下面一张图：
 
-![img](v2-ae8dd36b0679b027dd0cf237541655fc_720w.webp)
+![img](img/v2-ae8dd36b0679b027dd0cf237541655fc_720w.webp)
