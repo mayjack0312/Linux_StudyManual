@@ -159,4 +159,5 @@
 ### 3.然后借助JVM的 jconsole.exe  工具对相应线程进行具体分析
 
 ![](img/20180326214337895.png)
+
 jconsole具体使用细节可以参考[这篇文章](https://blog.csdn.net/ithomer/article/details/9923311)，这里就不做过多的介绍了。
