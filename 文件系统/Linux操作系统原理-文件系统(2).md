@@ -15,7 +15,7 @@ Linux以文件的形式对计算机中的数据和硬件资源进行管理，也
 
 文件目录块：
 
-![image](127259047-5adc0559-7bc4-40ae-adfd-47d3069e240b.png)
+![image](img/127259047-5adc0559-7bc4-40ae-adfd-47d3069e240b.png)
 
 通常，第一项是「.」，表示当前目录，第二项是「…」，表示上一级目录，接下来就是一项一项的文件名和 inode。<br>
 如果一个目录有超级多的文件，我们要想在这个目录下找文件，按照列表一项一项的找，效率就不高了。
@@ -28,7 +28,7 @@ Linux 系统的 ext 文件系统就是采用了哈希表，来保存目录的内
 
 文件inode
 
-![image](127259071-0e35aac3-e667-4204-b77d-fb0a84b0e13c.png)
+![image](img/127259071-0e35aac3-e667-4204-b77d-fb0a84b0e13c.png)
 
 ## 文件操作
 ### 文件链接
@@ -41,7 +41,7 @@ Linux 系统的 ext 文件系统就是采用了哈希表，来保存目录的内
 其实原理很简单，我们会在某个目录下创建一个文件名，这个文件名和硬链接的文件inode 相同，并且会在这个inode的记录中增加链接数量。<br>
 我们看到的就是两个链接到同一个inode 的文件其实是一个文件和inode的映射。<br>
 
-![image](127259141-450a7bff-0d2d-484e-bf24-c7b583979c2f.png)
+![image](img/127259141-450a7bff-0d2d-484e-bf24-c7b583979c2f.png)
 
 ln命令可以创建硬链接：
 
@@ -88,7 +88,7 @@ root@CentOS7 lnDemo]# ln source source_ln
 
 由于硬链接是在本分区指向相同的inode，那么就意味着inode的命名空间需要一直，但是不同的分区，inode的编号将会重置，所有不能通过inode映射同一个文件。
 
-![image](127259234-3a1e665a-5c6c-4b52-994a-adae12042e7e.png)
+![image](img/127259234-3a1e665a-5c6c-4b52-994a-adae12042e7e.png)
 
 * 软连接
 
@@ -112,7 +112,7 @@ root@CentOS7 lnDemo]# ln source source_ln
 
 我们发现 source_sln 的文件类型为 l ，且inode和source 不同。大小很小，原因就是我们存放的是地址字符。
 
-![image](127259326-bead1541-3a1f-4ffe-af9a-1045e7ec77e2.png)
+![image](img/127259326-bead1541-3a1f-4ffe-af9a-1045e7ec77e2.png)
 
 ### 文件新建(复制)
 
@@ -178,11 +178,11 @@ Linux 系统下，文件是虚拟文件系统，当我们ls / 的时候，linux 
 
 在将文件系统/dev/cdrom(此处暂且认为它是文件系统)挂载到挂载点/mnt之前，挂载点/mnt是根文件系统中的一个目录，"/"的data block中记录了/mnt的一些信息，其中包括inode号inode_n，而在inode table中，/mnt对应的inode记录中又存储了block指针block_n，此时这两个指针还是普通的指针。
 
-![image](127259551-c9648157-bc90-4dd9-b91d-6eda8cb057a3.png)
+![image](img/127259551-c9648157-bc90-4dd9-b91d-6eda8cb057a3.png)
 
 当文件系统/dev/cdrom挂载到/mnt上后，/mnt此时就已经成为另一个文件系统的入口了，因此它需要连接两边文件系统的inode和data block。
 
-![image](127259607-ccf610e6-bbc0-4154-a5b6-feffc6c6f204.png)
+![image](img/127259607-ccf610e6-bbc0-4154-a5b6-feffc6c6f204.png)
 
 * 在根文件系统的inode table中，为/mnt重新分配一个inode记录m，该记录的block指针block_m指向文件系统/dev/cdrom中的data block。
 * /mnt分配了新的inode记录m，那么在"/"目录的data block中，也需要修改其inode指针为inode_m以指向m记录。
@@ -286,7 +286,7 @@ i-node 表（i-node table）<br>
 
 文件描述符表每个进程都有一个，打开文件表和 i-node 表整个系统只有一个，它们三者之间的关系如下图所示。
 
-![image](127260023-82df0e08-da4f-47dd-8718-0e5ec71cca4a.png)
+![image](img/127260023-82df0e08-da4f-47dd-8718-0e5ec71cca4a.png)
 
 #### 文件描述符的意义
 
@@ -347,7 +347,7 @@ public static void main(String[] args) throws Exception {
 
 #### PCB
 
-![image](127260213-b63330b6-8cf3-410a-9c66-fffdd49fd339.png)
+![image](img/127260213-b63330b6-8cf3-410a-9c66-fffdd49fd339.png)
 
 #### fs_struct
 
@@ -386,7 +386,7 @@ struct files_struct {
 };
 ```
 
-![image](127260307-d1fb06e0-c458-4e13-b16f-270dac82429b.png)
+![image](img/127260307-d1fb06e0-c458-4e13-b16f-270dac82429b.png)
 
 #### ulimit
 
