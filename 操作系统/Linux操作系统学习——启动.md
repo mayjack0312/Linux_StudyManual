@@ -76,7 +76,7 @@
 
   boot.img由boot.S编译而成，512字节，安装在启动盘的第一个扇区，即MBR。由于空间有限，其代码十分简单，仅仅是起到一个引导的作用，指向后续的核心镜像文件，即core.img。core.img包括很多重要的部分，如lzma_decompress.img、diskboot.img、kernel.img等，结构如下图。
 
-![image](128177703-cd37ad73-edd7-4c6f-8b05-158760d2dab2.png)
+![image](img/128177703-cd37ad73-edd7-4c6f-8b05-158760d2dab2.png)
 
 整个加载流程如下：
 
