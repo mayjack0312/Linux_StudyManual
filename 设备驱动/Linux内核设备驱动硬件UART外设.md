@@ -12,7 +12,7 @@
 
 软件上 PC 这边需要安装一个串口调试助手软件，然后目标板 MCU 应用程序需要包含打印输出相关代码，当 MCU 程序运行起来后，驱动片内 UART 外设实现打印字符数据 (hello world.) 物理传输，在 PC 上串口调试助手软件里可以看到打印信息。
 
-![img](https://pic3.zhimg.com/80/v2-79bec5c17ea37214f212e701451ab552_720w.webp)
+![img](img/v2-79bec5c17ea37214f212e701451ab552_720w.webp)
 
 上图里的 MCU 应用程序是在 IAR 环境下编译链接的，因此我们的重点就是 stdio.h 头文件里的 printf() 在 IAR 下到底是如何与 UART 外设驱动函数“勾搭”起来的。
 
@@ -74,7 +74,7 @@ int main(void)
 
 **Library low-level interface implementation** 选项决定低层 I/O 实现，这里我们选 None，即由用户来实现。
 
-![img](https://pic1.zhimg.com/80/v2-2417b372d998a4473700b9575edc923c_720w.webp)
+![img](imgv2-2417b372d998a4473700b9575edc923c_720w.webp)
 
 配置好 Library 后编译工程会发现有如下报错，根据这个报错我们可以猜到 dl7M_tln.a 是 IAR 编译好的 C/C++ 库，库里面实现了 printf() 函数及其所依赖的 putchar() 函数，而 puchar() 函数对外提供了底层 I/O 接口函数，这个 I/O 函数名字叫 __write()，它就是需要用户结合芯片 UART 外设去实现的发送函数。
 
@@ -84,13 +84,13 @@ Error[Li005]: no definition for "__write" [referenced from putchar.o(dl7M_tln.a)
 
 在 IAR 目录下我们可以找到 dl7M_tln.a 文件路径，经过测试，工程 **Library** 设置里 Normal 和 Full 选项其实就是选 dl7M_tln.a 还是 dl7M_tlf.a 进用户工程去链接。
 
-![img](https://pic1.zhimg.com/80/v2-9c0c3c06803d513796a2f701d6209d58_720w.webp)
+![img](img/v2-9c0c3c06803d513796a2f701d6209d58_720w.webp)
 
 ### **4.2DLIB底层 I/O 接口设计**
 
 找到了 __write() 函数，但是它的原型到底是什么？我们该如何实现它？这时候需要去查万能的 \IAR Systems\Embedded Workbench 9.10.2\arm\doc\EWARM_DevelopmentGuide.ENU 手册，在里面搜索 __write 字样可以找到如下设计，原来我们在代码里调用的 C 标准 I/O 接口均是由 IAR 底层预编译好的 DLIB 去具体实现的，这个 DLIB 库也留下了给用户实现的最底层与硬件相关的接口函数。
 
-![img](https://pic1.zhimg.com/80/v2-ad69a3c14d92c80e6add86cb19d76eb0_720w.webp)
+![img](img/v2-ad69a3c14d92c80e6add86cb19d76eb0_720w.webp)
 
 IAR 为 DLIB 里那些最底层的 I/O 接口函数都创建了模板源文件，在这些模板文件里我们可以找到它们的原型，所以我们在 write.c 文件里找到了 __write() 原型及其示例实现。
 
@@ -98,7 +98,7 @@ IAR 为 DLIB 里那些最底层的 I/O 接口函数都创建了模板源文件�
 size_t __write(int handle, const unsigned char * buffer, size_t size)
 ```
 
-![img](https://pic1.zhimg.com/80/v2-b53770f7edd58593a4f397555096b928_720w.webp)
+![img](img/v2-b53770f7edd58593a4f397555096b928_720w.webp)
 
 ### **4.3DLIB库 I/O 相关源码实现**
 
@@ -144,13 +144,6 @@ DLIB 库中关于 I/O 相关的源码放在了如下目录里，感兴趣的可�
 \IAR Systems\Embedded Workbench 9.10.2\arm\src\lib\dlib\formatters
 ```
 
-![img](https://pic4.zhimg.com/80/v2-042ef8125c5e923c3f5f185a28967bd7_720w.webp)
+![img](img/v2-042ef8125c5e923c3f5f185a28967bd7_720w.webp)
 
 至此，IAR下调试信息输出机制之硬件UART外设痞子衡便介绍完毕了。
-
-------
-
-版权声明：本文为知乎博主「Linux内核库」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文 出处链接及本声明。  
-
-原文链接：https://zhuanlan.zhihu.com/p/586298947
-
