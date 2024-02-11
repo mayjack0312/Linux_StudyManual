@@ -4,7 +4,7 @@
 
 下图是Linux内核中GPIO子系统的软件驱动分层图：
 
-![img](v2-1819f094948b9f5248ca89dcc0cc45bb_720w.webp)
+![img](img/v2-1819f094948b9f5248ca89dcc0cc45bb_720w.webp)
 
 ## 2、常用API接口
 
@@ -473,7 +473,7 @@ MODULE_LICENSE("GPL v2");
 
 输出如下：
 
-![img](v2-69253fd3a036cc94655531ac7e10dadb_720w.webp)
+![img](img/v2-69253fd3a036cc94655531ac7e10dadb_720w.webp)
 
 通过uevent可以看到设备节点的路径以及驱动和设备匹配的属性值，此外，在上面图片中，也可以看到ctrl和gpio属性文件已经被成功导出到了该设备节点下面，使用下面的命令可以进行GPIO的控制：
 
@@ -487,11 +487,11 @@ MODULE_LICENSE("GPL v2");
 
 控制的效果如下所示：
 
-![img](v2-c773f3982a5e9adba2d3538c982c994b_720w.webp)
+![img](img/v2-c773f3982a5e9adba2d3538c982c994b_720w.webp)
 
 另外，在驱动程序中，我们使用了函数gpio_export()在sysfs中导出相关的GPIO信息，我们可以到/sys/class/gpio/gpioN目录下查看相关的GPIO信息，如下：
 
-![img](v2-c30f3ee7839270f7013fe10cdf4abde1_720w.webp)
+![img](img/v2-c30f3ee7839270f7013fe10cdf4abde1_720w.webp)
 
 属性文件value保存了当前GPIO的电平值，当我们调用gpio_export()函数时，将第二个形参传入为true时，表示GPIO的方向还能改变，将在上面的目录中生成direction属性文件，里面保存了当前GPIO的方向，我们还能使用echo命令对文件进行写操作，从而改变GPIO的方向。
 
