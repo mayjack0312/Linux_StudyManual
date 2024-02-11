@@ -22,7 +22,7 @@ ssh-keygen -C <comment> -f <keyfile> -t rsa -P "<passphrase>"
 
 执行上述命令，一路回车，会在当前登录用户的home目录下的.ssh目录下生成id_rsa和id_rsa.pub两个文件，分别代表密钥对的私钥和公钥，如下图所示：
 
-![](20170916200144505.png)
+![](img/20170916200144505.png)
 
 ## 1.2. 拷贝A的公钥（id_rsa.pub）到B
 
@@ -43,7 +43,7 @@ cat id_rsa.pub >> .ssh/authorized_keys
 
 如图：
 
-![](20170916200919602.png)
+![](img/20170916200919602.png)
 
 ## 1.4. 登录或拷贝
 
