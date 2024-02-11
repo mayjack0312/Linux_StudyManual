@@ -263,7 +263,7 @@ int sys_fork(struct pt_regs *regs)
 
 **最终都是直接调用do_fork。进程创建的函数层次结构如下图：**
 
-![动图封面](v2-8ab27fddbeee6271cbad74129d3467a3_b.jpg)
+![动图封面](img/v2-8ab27fddbeee6271cbad74129d3467a3_b.jpg)
 
 进程创建的函数层次结构
 
@@ -391,7 +391,7 @@ clone_flags：该标志位的4个字节分为两部分。最低的一个字节�
 
 **本文所涉及到的clone标志详见下表：**
 
-![动图封面](v2-3c5e230e7cf07cefad9b856ae3dd2c6d_b.jpg)
+![动图封面](img/v2-3c5e230e7cf07cefad9b856ae3dd2c6d_b.jpg)
 
 - **stack_start：**子进程用户态堆栈的地址。
 - **regs：**指向pt_regs结构体的指针。当系统发生系统调用，即用户进程从用户态切换到内核态时，该结构体保存通用寄存器中的值，并被存放于内核态的堆栈中。
