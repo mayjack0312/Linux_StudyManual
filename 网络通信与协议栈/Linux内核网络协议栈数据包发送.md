@@ -621,7 +621,7 @@ void dev_queue_xmit(struct sk_buff *skb, struct device *dev, int pri)
 
 物理层则牵扯到具体的网络接口硬件设备了，实则是一个网络驱动程序。不同的网卡其驱动程序有所不同，这跟硬件的时序，延迟等有关。
 
-![img](v2-a8c44790925bc12839c9817d1cfb83ff_720w.webp)
+![img](img/v2-a8c44790925bc12839c9817d1cfb83ff_720w.webp)
 
 关于驱动，这里我们就不介绍了。
 
