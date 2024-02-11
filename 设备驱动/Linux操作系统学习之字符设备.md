@@ -13,7 +13,7 @@
 
   这里需要注意的是，设备控制器不属于操作系统的一部分，但是设备驱动程序属于操作系统的一部分。操作系统的内核代码可以像调用本地代码一样调用驱动程序的代码，而驱动程序的代码需要发出特殊的面向设备控制器的指令，才能操作设备控制器。设备驱动程序中是一些面向特殊设备控制器的代码，不同的设备不同。但是对于操作系统其它部分的代码而言，设备驱动程序有统一的接口。
 
-![image](https://user-images.githubusercontent.com/87457873/128175363-3655a3b9-e0a6-4980-ac7f-5e1b891dcc0e.png)
+![image](img/128175363-3655a3b9-e0a6-4980-ac7f-5e1b891dcc0e.png)
 
 设备驱动本身作为一个内核模块，通常以ko文件的形式存在，它有着其独特的代码结构：
 
@@ -291,7 +291,7 @@ static int chrdev_open(struct inode *inode, struct file *filp)
 
 上述过程借用极客时间中的图来作为总结。
 
-![image](128175400-ba80285b-b70d-45ee-9e47-50a81f135dc2.png)
+![image](img/128175400-ba80285b-b70d-45ee-9e47-50a81f135dc2.png)
 
 ## 五. 写入字符设备
 
@@ -355,7 +355,7 @@ static ssize_t lp_write(struct file *file, const char __user *buf,
 * 14位表示参数的大小；
 * 最高2位是 DIR，表示写入、读出，还是读写。
 
-![image](128175427-20a921aa-03cb-425d-a66e-bdd6884b4d49.png)
+![image](img/128175427-20a921aa-03cb-425d-a66e-bdd6884b4d49.png)
 
 ioctl()也是一个系统调用，其中fd 是这个设备的文件描述符，cmd 是传给这个设备的命令，arg 是命令的参数。主要调用do_vfs_ioctl()完成实际功能。
 
