@@ -14,7 +14,7 @@ LVM是逻辑盘卷管理（Logical Volume Manager）的简称，它是Linux环�
 
 LVM概念图：
 
-![](lvm-concept.png)
+![](img/lvm-concept.png)
 
 - **PV（Physical Volume）物理卷** 磁盘分区后（还未格式化为文件系统）使用 pvcreate 命令可以将硬盘分区创建为 pv，此分区的 systemID 为8e，即为 LVM 格式的系统标识符。
 - **VG（Volume Group）卷组** 将多个 PV 组合起来，使用 vgcreate 命令创建成卷组。卷组包含了多个 PV，相当于重新整合了多个分区后得到的硬盘。虽然 VG 整合了多个 PV，但是创建 VG 时会将所有空间根据指定 PE 大小划分为多个 PE，在 LVM 模式下的存储都是以 PE 为单元，类似于文件系统的 Block。
@@ -26,7 +26,7 @@ LVM概念图：
 
 LVM 之所以能够伸缩容量，实现的方法就是讲 LV 里空闲的 PE 移出，或向 LV 中添加空闲的 PE。
 
-![](lvm-arch.png)
+![](img/lvm-arch.png)
 
 # 4. 格式化为LVM盘
 
