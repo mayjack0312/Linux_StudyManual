@@ -1,20 +1,20 @@
 ## **1、数据报文的封装与分用**
 
-![img](v2-7c40dfaa04dd75075c4ac7c28422b5ca_720w.webp)
+![img](img/v2-7c40dfaa04dd75075c4ac7c28422b5ca_720w.webp)
 
 **封装**：当应用程序用 TCP 协议传送数据时，数据首先进入内核网络协议栈中，然后逐一通过 TCP/IP 协议族的每层直到被当作一串比特流送入网络。对于每一层而言，对收到的数据都会封装相应的协议首部信息（有时还会增加尾部信息）。TCP 协议传给 IP 协议的数据单元称作 TCP 报文段，或简称 TCP 段（TCP segment）。IP 传给数据链路层的数据单元称作 IP 数据报（IP datagram），最后通过以太网传输的比特流称作帧（Frame）。
 
-![img](v2-c3b8c1a3f2fa4f6fb8a2a4eeceec7488_720w.webp)
+![img](img/v2-c3b8c1a3f2fa4f6fb8a2a4eeceec7488_720w.webp)
 
 **分用**：当目的主机收到一个以太网数据帧时，数据就开始从内核网络协议栈中由底向上升，同时去掉各层协议加上的报文首部。每层协议都会检查报文首部中的协议标识，以确定接收数据的上层协议。这个过程称作分用。
 
-![img](v2-854a125ad23365ee22d7963bf32df8c0_720w.webp)
+![img](img/v2-854a125ad23365ee22d7963bf32df8c0_720w.webp)
 
 ## 2、**Linux 内核网络协议栈**
 
 ### 2.1**协议栈的分层结构**
 
-![img](v2-eb80114865e222e021776d34b24585a9_720w.webp)
+![img](img/v2-eb80114865e222e021776d34b24585a9_720w.webp)
 
 **逻辑抽象层级**：
 
@@ -39,11 +39,11 @@
 
 - **系统调用接口层（System call interface）**，实质是一个面向用户空间（User Space）应用程序的接口调用库，向用户空间应用程序提供使用网络服务的接口。
 
-![img](v2-92fa4b5fb638d50d583baae78145d878_720w.webp)
+![img](img/v2-92fa4b5fb638d50d583baae78145d878_720w.webp)
 
 ### 2.2**协议栈的数据结构**
 
-![img](v2-983925d7c52084d19848ffaec8c3c1df_720w.webp)
+![img](img/v2-983925d7c52084d19848ffaec8c3c1df_720w.webp)
 
 - **msghdr**：描述了从应用层传递下来的消息格式，包含有用户空间地址，消息标记等重要信息。
 - **iovec**：描述了用户空间地址的起始位置。
@@ -80,7 +80,7 @@
 
 `start_kernel()` 中主要函数及调用关系如下：
 
-![img](v2-3e94921a373d33460fb7f564de7a7722_720w.webp)
+![img](img/v2-3e94921a373d33460fb7f564de7a7722_720w.webp)
 
 `start_kernel()` 的过程中会执行 `socket_init()` 来完成协议栈的初始化，实现如下：
 
@@ -120,7 +120,7 @@ void sock_init(void)//网络栈初始化
 }
 ```
 
-![img](v2-7e3f575b545ce0642bd60314346a14ee_720w.webp)
+![img](img/v2-7e3f575b545ce0642bd60314346a14ee_720w.webp)
 
 `sock_init()` 包含了内核协议栈的初始化工作：
 
@@ -154,15 +154,15 @@ void sock_init(void)//网络栈初始化
   - `dev_add_pack(&ip_packet_type);`：向 `ptype_base[PTYPE_HASH_SIZE];` 注册 IP 协议的操作集合。
   - `socket.c` 提供的系统调用接口。
 
-![img](v2-614208987340e56ba7418f32d5346e1d_720w.webp)
+![img](img/v2-614208987340e56ba7418f32d5346e1d_720w.webp)
 
-![img](v2-322e847416d72b9c1775b00f44dd867c_720w.webp)
+![img](img/v2-322e847416d72b9c1775b00f44dd867c_720w.webp)
 
 协议栈初始化完成后再执行 `dev_init()`，继续设备的初始化。
 
 ### 2.4**Socket 创建流程**
 
-![img](v2-f82295bd27bd9efb16a79ed262649dec_720w.webp)
+![img](img/v2-f82295bd27bd9efb16a79ed262649dec_720w.webp)
 
 ### 2.5**协议栈收包流程概述**
 
@@ -219,16 +219,16 @@ int ethdev_init(struct device *dev)
 
 ## 3、**UDP 的收发包流程总览**
 
-![img](v2-0e3a50c88aa6da33b7115da331e1e7c0_720w.webp)
+![img](img/v2-0e3a50c88aa6da33b7115da331e1e7c0_720w.webp)
 
 ### 3.1**内核中断收包流程**
 
-![img](v2-d7555d650b8c7a8e342099a81d9ec0a0_720w.webp)
+![img](img/v2-d7555d650b8c7a8e342099a81d9ec0a0_720w.webp)
 
 ### 3.2**UDP 收包流程**
 
-![img](v2-d96407f45901fe7d0d055387b23b6040_720w.webp)
+![img](img/v2-d96407f45901fe7d0d055387b23b6040_720w.webp)
 
 ### 3.3**UDP 发包流程**
 
-![img](v2-964c9f567ea56de9137e7d208e2f66a9_720w.webp)
+![img](img/v2-964c9f567ea56de9137e7d208e2f66a9_720w.webp)
