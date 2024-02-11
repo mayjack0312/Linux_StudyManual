@@ -61,7 +61,7 @@ static int __bprm_mm_init(struct linux_binprm *bprm)
 
 我们平时所说的进程虚拟地址空间在 Linux 是通过一个个的 vm_area_struct 对象来表示的。
 
-![img](v2-65c9df9b151c25df39283157eb473f58_720w.webp)
+![img](img/v2-65c9df9b151c25df39283157eb473f58_720w.webp)
 
 每一个 vm_area_struct（就是上面 __bprm_mm_init 函数中的 vma）对象表示进程虚拟地址空间里的一段范围，其 vm_start 和 vm_end 表示启用的虚拟地址范围的开始和结束。
 
@@ -78,7 +78,7 @@ struct vm_area_struct {
 
 在上面 __bprm_mm_init 函数中通过 kmem_cache_zalloc 申请了一个 vma 内核对象。vm_end 指向了 STACK_TOP_MAX（地址空间的顶部附近的位置），vm_start 和 vm_end 之间留了一个 Page 大小。**也就是说默认给栈准备了 4KB 的大小** 。最后把栈的指针记录到 bprm->p 中。
 
-![img](v2-b4460f3c4da6938f1548410ab562b612_720w.webp)
+![img](img/v2-b4460f3c4da6938f1548410ab562b612_720w.webp)
 
 接下来进程加载过程会使用 load_elf_binary 真正开始加载可执行二进制程序。在加载时，会把前面准备的进程栈的地址空间指针设置到了新进程 mm 对象上。
 
@@ -95,7 +95,7 @@ static int load_elf_binary(struct linux_binprm *bprm)
 }
 ```
 
-![img](v2-67dc52318a0b598168a2509acc495f29_720w.webp)
+![img](img/v2-67dc52318a0b598168a2509acc495f29_720w.webp)
 
 这样新进程将来就可以使用栈进行函数调用，以及局部变量的申请了。
 
@@ -134,7 +134,7 @@ good_area:
 
 当访问栈上变量的内存的时候，首先会调用 find_vma 根据变量地址 address 找到其所在的 vma 对象。接下来调用的 if (vma->vm_start <= address) 是在判断地址空间还够不够用。
 
-![img](v2-e3c4101a6975c49a4602c5c814892939_720w.webp)
+![img](img/v2-e3c4101a6975c49a4602c5c814892939_720w.webp)
 
 如果栈内存 vma 的 start 比要访问的 address 小，则证明地址空间够用，只需要分配物理内存页就行了。如果栈内存 vma 的 start 比要访问的 address 大，则需要调用 expand_stack 先扩展一下栈的虚拟地址空间 vma。扩展虚拟地址空间的具体细节我们在第三节再讲。
 
@@ -168,7 +168,7 @@ Linux 是用四级页表来管理虚拟地址空间到物理内存之间的映�
 
 看一下下面这个图就比较好理解了
 
-![img](v2-29cda8752da193f919c7e1d79f1fdc1f_720w.jpg)
+![img](img/v2-29cda8752da193f919c7e1d79f1fdc1f_720w.jpg)
 
 ```text
 //file:mm/memory.c
@@ -202,7 +202,7 @@ static int do_anonymous_page(struct mm_struct *mm, struct vm_area_struct *vma,
 
 内核是用伙伴系统来管理所有的物理内存页的。其它模块需要物理页的时候都会调用伙伴系统对外提供的函数来申请物理内存。
 
-![img](v2-a3ea1ac0ec54715a1b24f908b9c3e04b_720w.webp)
+![img](img/v2-a3ea1ac0ec54715a1b24f908b9c3e04b_720w.webp)
 
 到了这里，开篇的问题一就有答案了，堆栈的物理内存是什么时候分配的？进程在加载的时候只是会给新进程的栈内存分配一段地址空间范围。而真正的物理内存是等到访问的时候触发缺页中断，再从伙伴系统中申请的。
 
@@ -212,7 +212,7 @@ static int do_anonymous_page(struct mm_struct *mm, struct vm_area_struct *vma,
 
 我回头看下缺页处理函数 __do_page_fault。如果栈内存 vma 的 start 比要访问的 address 大，则需要调用 expand_stack 先扩展一下栈的虚拟地址空间 vma。
 
-![img](v2-c40035a9cf5fa602efa48b7f43a689c7_720w.webp)
+![img](img/v2-c40035a9cf5fa602efa48b7f43a689c7_720w.webp)
 
 回顾 __do_page_fault 源码，看到扩充栈空间的是由 expand_stack 函数来完成的。
 
@@ -273,7 +273,7 @@ int expand_downwards(struct vm_area_struct *vma, unsigned long address)
 
 然后会判断此次栈空间是否被允许扩充， 判断是在 acct_stack_growth 中完成的。如果允许扩展，则简单修改一下 vma->vm_start 就可以了！
 
-![img](v2-cff6204b9aa9ec2e34875f38963c2d44_720w.webp)
+![img](img/v2-cff6204b9aa9ec2e34875f38963c2d44_720w.webp)
 
 我们再来看 acct_stack_growth 都进行了哪些限制判断。
 
@@ -329,7 +329,7 @@ stack size              (kbytes, -s) 10240
 第二，当进程在运行的过程中在栈上开始分配和访问变量的时候，如果物理页还没有分配，会触发缺页中断。在缺页中断中调用内核的伙伴系统真正地分配物理内存。
 第三，当栈中的存储超过 4KB 的时候会自动进行扩大。不过大小要受到限制，其大小限制可以通过 ulimit -s来查看和设置。
 
-![img](v2-a3ea1ac0ec54715a1b24f908b9c3e04b_720w.webp)
+![img](img/v2-a3ea1ac0ec54715a1b24f908b9c3e04b_720w.webp)
 
 注意，今天我们讨论的都是进程栈。线程栈和进程栈有些不一样。
 
