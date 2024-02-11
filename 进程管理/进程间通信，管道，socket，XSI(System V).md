@@ -65,7 +65,7 @@ int main(){
 
 当关闭之后就是取决于我们需要对管道的数据流方向做准备。要么从子进程流向父进程，要么从父进程流向子进程。
 
-![image](127452218-fee35e85-718a-4303-92bc-965065e3eac9.png)
+![image](img/127452218-fee35e85-718a-4303-92bc-965065e3eac9.png)
 
 mkfifo函数
 
@@ -219,7 +219,7 @@ int pclose(FILE *fp);
 
 popen先执行fork，然后调用exec执行cmdstring，并且返回一个标准IO文件指针。如果type是"r"，则文件指针连接到cmdstring的标准输出；如果是"w"，则文件指针连接到cmfstring的标准输入
 
-![image](127452540-8c4dd73b-68b1-4357-a4c0-015667790601.png)
+![image](img/127452540-8c4dd73b-68b1-4357-a4c0-015667790601.png)
 
 由图可以看出，stdout和stdin是较于子进程而言的。
 
