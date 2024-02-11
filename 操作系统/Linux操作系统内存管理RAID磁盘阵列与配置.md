@@ -51,46 +51,46 @@ RAID0、RAID1、RAID5、RAID6、RAID1+0等
 
 安全性低于RAID 10
 
-![img](v2-3af4a5d53438b5675fccb5c4e59ad8b4_720w.webp)
+![img](img/v2-3af4a5d53438b5675fccb5c4e59ad8b4_720w.webp)
 
 ## 2、创建软 RAID 磁盘阵列实验
 
 **1、检查是否已安装mdadm 软件包**
 
-![img](v2-07e14384ea2796426306b78a16e2cb85_720w.webp)
+![img](img/v2-07e14384ea2796426306b78a16e2cb85_720w.webp)
 
 **2、先关闭虚拟机，然后编辑虚拟机设置，添加4块硬盘，每块分配40G，点击确认后开启虚拟机**
 
-![img](v2-da6b4b1a67b20524e30997498144f001_720w.webp)
+![img](img/v2-da6b4b1a67b20524e30997498144f001_720w.webp)
 
 **3、我们使用xshell来进行连接，使用fdisk -l来查看分区情况**
 
-![img](v2-5e60c0f2344221b30cebb7e272880aae_720w.webp)
+![img](img/v2-5e60c0f2344221b30cebb7e272880aae_720w.webp)
 
 
 **4、对分区进行管理，创建分区并修改分区类型，这里示范一个/dev/sdb，其余的操作一样，就不示范了**
 
-![img](v2-cccf6811a3aa526774d0f2c6865778aa_720w.webp)
+![img](img/v2-cccf6811a3aa526774d0f2c6865778aa_720w.webp)
 
 **5、使用fdisk -l看一下分区情况，是否全部转换完成**
 
-![img](v2-c5314db4d9bfbe88465dde7d5428dbde_720w.webp)
+![img](img/v2-c5314db4d9bfbe88465dde7d5428dbde_720w.webp)
 
 **6、验证一下磁盘是否已做raid，然后开始创建raid，这里我们创建一个raid名为md0，级别使用RAID5，然后-l3设置使用三个磁盘，-x1使用一块备份磁盘，再进行查看创建速度。**
 
-![img](v2-887d7e3d66e1f9c40ee65bd0014d32e2_720w.webp)
+![img](img/v2-887d7e3d66e1f9c40ee65bd0014d32e2_720w.webp)
 
 **7、这里已经创建好了，我们开始验证一下**
 
-![img](v2-1e889ee7e3cc46bb421dda188944b291_720w.webp)
+![img](img/v2-1e889ee7e3cc46bb421dda188944b291_720w.webp)
 
 **8、我们模拟让它坏掉一个磁盘，来测试一下备份磁盘是否会自动顶上**
 
-![img](v2-11ac37fcb3db5e8346ecca6e4ae76314_720w.webp)
+![img](img/v2-11ac37fcb3db5e8346ecca6e4ae76314_720w.webp)
 
 **9、想使用起来得先进行格式化，再进行挂载，我接着尝试了一下在格式化和挂载之后备用磁盘是否还能自动顶上，实验结果：可以。**
 
-![img](v2-471b24d8561b269c443c53bd91b99143_720w.webp)
+![img](img/v2-471b24d8561b269c443c53bd91b99143_720w.webp)
 
 ## 3、创建软 RAID 磁盘阵列步骤命令
 
