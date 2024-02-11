@@ -25,11 +25,11 @@ struct task_struct {/** offsets of these are hardcoded elsewhere - touch with ca
 
 **Linux把所有的进程使用双向链表连接起来, 如下图(来源<Linux设计与实现>):**
 
-![img](v2-43d9ec266d5c37594e4de7d5758ba50e_720w.webp)
+![img](img/v2-43d9ec266d5c37594e4de7d5758ba50e_720w.webp)
 
 Linux内核为了加快获取当前进程的的task_struct结构, 使用了一个技巧, 就是把task_struct放置在内核栈的栈底, 这样就可以通过esp寄存器快速获取到当前运行进程的task_struct结构. 如下图:
 
-![img](v2-eedd18a394eedd6829849cc25e89dc17_720w.webp)
+![img](img/v2-eedd18a394eedd6829849cc25e89dc17_720w.webp)
 
 **获取当前运行进程的task_struct代码如下:**
 
@@ -54,7 +54,7 @@ return current;
 
 **各种状态间的转换如下图:**
 
-![img](v2-c0b28d06c4e8f8436d3e94efd820af9e_720w.webp)
+![img](img/v2-c0b28d06c4e8f8436d3e94efd820af9e_720w.webp)
 
 ## 四，进程的创建
 
