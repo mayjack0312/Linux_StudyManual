@@ -5,23 +5,23 @@
 - 进程的地址空间：按照程序自身的逻辑关系划分为若干个段，每个段都有一个段名（在低级语言中，程序员使用段名来编程），每段从0开始编址。
 - 内存分配规则：以段为单位进行分配，每个段在内存中占连续空间，但各段之间可以不相邻。
 
-![img](v2-0b9b91ad1f8f67e7e15a0fc719bc1502_720w.webp)
+![img](img/v2-0b9b91ad1f8f67e7e15a0fc719bc1502_720w.webp)
 
 - 分段系统的逻辑地址结构由段号（段名）和段内地址（段内偏移量）所组成。
 
-![img](v2-918b6a6b3e75201ee2d205365b162f18_720w.webp)
+![img](img/v2-918b6a6b3e75201ee2d205365b162f18_720w.webp)
 
 ### 1.2段表
 
-![img](v2-9cb62088c79fd7e8f31b17fad2d1d8bd_720w.webp)
+![img](img/v2-9cb62088c79fd7e8f31b17fad2d1d8bd_720w.webp)
 
 - 每一个程序设置一个段表，放在内存,属于进程的现场信息
 
 ### 1.3地址变换
 
-![img](v2-d0a5d7ae823e2c0de3196de7d181d849_720w.webp)
+![img](img/v2-d0a5d7ae823e2c0de3196de7d181d849_720w.webp)
 
-![img](v2-6449d02941134e902da8ff539a929fce_720w.webp)
+![img](img/v2-6449d02941134e902da8ff539a929fce_720w.webp)
 
 ### 1.4段的保护
 
@@ -52,15 +52,15 @@
 - 这里主要与页式存储管理进行一下对比。
 - 分段比分页更容易实现信息的共享和保护。
 
-![img](v2-8e41f75bf364037e526db0f656082c48_720w.webp)
+![img](img/v2-8e41f75bf364037e526db0f656082c48_720w.webp)
 
 - 纯代码举例：比如，有一个代码段只是简单的输出“Hello World!”。
 
-![img](v2-bc3414d6cfe0c16d679779b1f0217f26_720w.webp)
+![img](img/v2-bc3414d6cfe0c16d679779b1f0217f26_720w.webp)
 
 ### 1.7页式系统与段式系统的对比
 
-![img](v2-a8a0f2c4f0bd8f666f321b565d41f095_720w.webp)
+![img](img/v2-a8a0f2c4f0bd8f666f321b565d41f095_720w.webp)
 
 - 补充：
 - 段长是可变的，页的大小是固定的。
@@ -70,37 +70,37 @@
 
 ### 1.8总结
 
-![img](v2-6db3da902a93c013e81a2c67d9093b44_720w.webp)
+![img](img/v2-6db3da902a93c013e81a2c67d9093b44_720w.webp)
 
 ## 2、段页式存储管理
 
 ### 2.1分页、分段的有缺点分析
 
-![img](v2-20513fde9949e32446b67e53ad670b7e_720w.webp)
+![img](img/v2-20513fde9949e32446b67e53ad670b7e_720w.webp)
 
 ### 2.2基本思想
 
 - 用户程序划分：按段式划分（对用户来讲，按段的逻辑关系进行划分；对系统讲，按页划分每一段）
 - 逻辑地址：
 
-![img](v2-b1839841926eb05069b042989e8cfd3f_720w.webp)
+![img](img/v2-b1839841926eb05069b042989e8cfd3f_720w.webp)
 
 - 内存划分：按页式存储管理方案
 - 内存分配：以页为单位进行分配
 
-![img](v2-572d543c9b5da3027966ded34d56dfd1_720w.webp)
+![img](img/v2-572d543c9b5da3027966ded34d56dfd1_720w.webp)
 
 ### 2.3逻辑地址结构
 
-![img](v2-f49ff2368aa4983ffe010a1b5c1f04fc_720w.webp)
+![img](img/v2-f49ff2368aa4983ffe010a1b5c1f04fc_720w.webp)
 
 ### 2.4段表页表
 
-![img](v2-89c049df540ee806c93e1635e2f72d7a_720w.webp)
+![img](img/v2-89c049df540ee806c93e1635e2f72d7a_720w.webp)
 
 ### 2.5地址转换
 
-![img](v2-f83f355d2c2b1da2c9a25a73176fb896_720w.webp)
+![img](img/v2-f83f355d2c2b1da2c9a25a73176fb896_720w.webp)
 
 ### 2.6评价
 
@@ -117,4 +117,4 @@
 
 ### 2.7总结
 
-![img](v2-7495c4ec766121e40fe80b7a42160108_720w.webp)
+![img](img/v2-7495c4ec766121e40fe80b7a42160108_720w.webp)
