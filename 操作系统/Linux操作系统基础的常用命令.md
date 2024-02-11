@@ -20,7 +20,7 @@ CentOS
 
 ### 1.4Linux目录结构
 
-![img](v2-0ba0cffb7f05d4eccec30210c8e64851_720w.webp)
+![img](img/v2-0ba0cffb7f05d4eccec30210c8e64851_720w.webp)
 
 - bin (binaries)存放二进制可执行文件
 - sbin (super user binaries)存放二进制可执行文件，只有root才能访问
